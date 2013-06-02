@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.nlf.fp</groupId>
+    <artifactId>Food-Pantry</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>Food-Pantry Maven Webapp</name>
+    <url>http://newlifefellowship.org/</url>
+    <description>New Life Felloship Food Pantry Web Application</description>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>Food-Pantry</finalName>
+        <plugins>
+            <plugin>
+                <!-- Let's you run mvn jetty:run from the command line. -->
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <!-- Let's you access the running app at http://localhost:8080/Food-Pantry -->
+                        <contextPath>/Food-Pantry</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
