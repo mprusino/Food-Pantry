@@ -6,7 +6,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>org.nlf.fp.servlet.HomeServlet</servlet-class>
+        <servlet-class>org.newlifefellowship.servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>

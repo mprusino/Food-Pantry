@@ -1,0 +1,6 @@
+Requirements
+
+This food pantry application is intended to play a very important role and must:
+* Register new guests
+* Track orders
+* Report on the data for funding purposes
