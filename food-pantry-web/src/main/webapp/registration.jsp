@@ -94,7 +94,7 @@
                 </span>
             </div>
         </div>
-        <div class="control-group">
+        <div class="control-group {{adultsError}}">
             <label class="control-label" for="adults">Adults (age 18-65)</label>
             <div class="controls">
                 <input
@@ -106,10 +106,14 @@
                     min="0"
                     max="20"
                     required/>
-                <span class="help-inline">{{adultsHelpInline}}</span>
+                <span class="help-inline">
+                    <span ng-show="registrationForm.adults.$error.number">Please enter a number.</span>
+                    <span ng-show="registrationForm.adults.$error.min">Minimum is 0.</span>
+                    <span ng-show="registrationForm.adults.$error.max">Maximum is 20.</span>
+                </span>
             </div>
         </div>
-        <div class="control-group">
+        <div class="control-group {{seniorsError}}">
             <label class="control-label" for="seniors">Seniors (age 65+)</label>
             <div class="controls">
                 <input
@@ -121,7 +125,11 @@
                     min="0"
                     max="20"
                     required/>
-                <span class="help-inline">{{seniorsHelpInline}}</span>
+                <span class="help-inline">
+                    <span ng-show="registrationForm.seniors.$error.number">Please enter a number.</span>
+                    <span ng-show="registrationForm.seniors.$error.min">Minimum is 0.</span>
+                    <span ng-show="registrationForm.seniors.$error.max">Maximum is 20.</span>
+                </span>
             </div>
         </div>
         <div class="control-group">

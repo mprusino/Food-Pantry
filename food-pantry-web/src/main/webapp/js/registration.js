@@ -12,9 +12,13 @@ function RegistrationCtrl($scope) {
 		});
 	});
 	
-	
-	// TODO Set up the following validation for the adults and seniors fields.
 	$scope.$watch("registrationForm.children.$valid", function(isNowValid) {
 		$scope.childrenError = isNowValid ? "" : "error";
+	});
+	$scope.$watch("registrationForm.adults.$valid", function(isNowValid) {
+		$scope.adultsError = isNowValid ? "" : "error";
+	});
+	$scope.$watch("registrationForm.seniors.$valid", function(isNowValid) {
+		$scope.seniorsError = isNowValid ? "" : "error";
 	});
 }
