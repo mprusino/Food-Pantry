@@ -57,6 +57,21 @@
             <artifactId>jersey-container-servlet-core</artifactId>
             <version>2.0</version>
         </dependency>
+        <dependency>
+        	<groupId>org.glassfish.jersey.media</groupId>
+        	<artifactId>jersey-media-json-jettison</artifactId>
+        	<version>2.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.sun.jersey</groupId>
+        	<artifactId>jersey-json</artifactId>
+        	<version>1.17.1</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.glassfish.jersey.media</groupId>
+        	<artifactId>jersey-media-json-jackson</artifactId>
+        	<version>2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,6 +91,7 @@
             </plugin>
             <plugin>
                 <!-- Sets up the ability to run mvn jetty:run from the command line. -->
+                <!-- Also mvnDebug jetty:run for debugging. (Jetty will wait until you connect.) -->
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jettyVersion}</version>
@@ -84,7 +100,7 @@
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                     <webApp>
                         <!-- Let's you access the running app at http://localhost:8080/Food-Pantry -->
-                        <contextPath>/Food-Pantry</contextPath>
+                        <contextPath>/</contextPath>
                     </webApp>
                     <!--<webAppSourceDirectory>food-pantry-web/src/main/webapp</webAppSourceDirectory>-->
                     <encoding>UTF-8</encoding>

@@ -20,16 +20,23 @@
         <div class="control-group">
             <label class="control-label" for="firstname">First Name</label>
             <div class="controls">
-                <input placeholder="First Name"
+                <input
+                    placeholder="First Name"
+                    name="firstname"
                     type="text"
-                    ng-model="firstname" 
+                    ng-model="firstname"
                     required/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="lastname">Last Name</label>
             <div class="controls">
-                <input type="text" id="lastname" name="lastname" placeholder="Last Name" />
+                <input
+                    placeholder="Last Name"
+                    name="lastname"
+                    type="text"
+                    ng-model="lastname"
+                    required/>
             </div>
         </div>
         <div class="control-group" id="ethnicity">
@@ -47,28 +54,17 @@
         <h4>Address</h4>
         <hr>
         <div class="control-group">
-            <!-- Should control ZIP Code -->
-            <label class="control-label" for="city">City</label>
-            <div class="controls">
-                <input type="text" id="city" name="city" placeholder="City"/>
-            </div>
-        </div>
-        <div class="control-group" id="state">
-            <label class="control-label">State</label>
-            <div class="controls">
-                <div class="btn-group" data-toggle="buttons-radio">
-                    <button type="button" class="btn active">New York</button>
-                    <button type="button" class="btn">New Jersey</button>
-                    <button type="button" class="btn">Connecticut</button>
-                    <button type="button" class="btn">Other</button>
-                </div>
-            </div>
-        </div>
-        <div class="control-group">
-            <!-- Should control City -->
+            <%-- Should control City & State --%>
             <label class="control-label" for="zip">ZIP Code</label>
             <div class="controls">
-                <input type="text" id="zip" name="zip" placeholder="ZIP Code"/>
+                <input
+                    placeholder="ZIP Code"
+                    name="zip"
+                    id="zip"
+                    type="text" />
+                <span class="help-inline">
+                    <span>Ahh... {{neighborhood}}</span>
+                </span>
             </div>
         </div>
         <div>
