@@ -1,6 +1,7 @@
 package org.newlifefellowship.services;
 
 import org.newlifefellowship.models.Neighborhood;
+import org.newlifefellowship.models.State;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,17 +13,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Path("/zipcodes")
-public class ZipCodes {
+public class ZipCodeService {
     private static final Map<String, Neighborhood> ZIP_CODES;
 
     static {
         ZIP_CODES = new HashMap<String, Neighborhood>();
-        ZIP_CODES.put("11103", new Neighborhood("11103", "Astoria", "NY"));
+        ZIP_CODES.put("11103", new Neighborhood("11103", "Astoria", new State(
+                "NY", "New York")));
     }
 
     @GET
     @Path("/{zipcode}")
-    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     public Neighborhood getZipCodes(@PathParam("zipcode") final String zipcode) {
         return ZIP_CODES.get(zipcode);
     }

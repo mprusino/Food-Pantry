@@ -2,18 +2,18 @@ package org.newlifefellowship.models;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "Neighborhood")
 public class Neighborhood {
     private String zipCode;
     private String neighborhood;
-    private String state;
+    private State state;
 
     public Neighborhood() {
 
     }
 
     public Neighborhood(final String zipCode, final String neighborhood,
-            final String state) {
+            final State state) {
         super();
         this.zipCode = zipCode;
         this.neighborhood = neighborhood;
@@ -36,12 +36,11 @@ public class Neighborhood {
         this.neighborhood = neighborhood;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(final String state) {
+    public void setState(final State state) {
         this.state = state;
     }
-
 }

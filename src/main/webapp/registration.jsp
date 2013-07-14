@@ -13,7 +13,7 @@
 <body ng-controller="RegistrationCtrl">
 <div class="container span9">
 <h2>Guest Information</h2>
-<div class="form-horizontal" ng-form="registrationForm">
+<form name="registrationForm" id="registrationForm" class="form-horizontal" action="/services/guest">
     <fieldset>
         <h4 >Personal Information</h4>
         <hr>
@@ -22,9 +22,9 @@
             <div class="controls">
                 <input
                     placeholder="First Name"
-                    name="firstname"
+                    name="firstName"
                     type="text"
-                    ng-model="firstname"
+                    ng-model="firstName"
                     required/>
             </div>
         </div>
@@ -33,9 +33,9 @@
             <div class="controls">
                 <input
                     placeholder="Last Name"
-                    name="lastname"
+                    name="lastName"
                     type="text"
-                    ng-model="lastname"
+                    ng-model="lastName"
                     required/>
             </div>
         </div>
@@ -147,7 +147,7 @@
         <tt>{{registrationForm.$valid}}</tt><br/>
         <tt>{{registrationForm.$error}}</tt><br/>
     </div>
-</div>
+</form>
 </div>
 </body>
 </html>
