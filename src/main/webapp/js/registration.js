@@ -1,3 +1,10 @@
+$(function() {
+	// This function runs when the page is ready.
+	$("#submit").click(function() {
+		submitForm();
+	});
+});
+
 function form2Object() {
 	return {
 			firstName : $("input[name='firstName']").val(),
@@ -16,8 +23,16 @@ function submitForm() {
 		data: JSON.stringify(form2Object()),
 		contentType: 'application/json',
 		type: 'POST'
-	}).done(function (data) {
-		console.log("guest created with id: " + data);
+	}).done(function (data, textstatus, jqXHR) {
+		if (jqXHR.status == 201) {
+			// 201 status is "Created" and this indicates a success!
+			var guestId = data;
+			alert("Guest created with ID: " + guestId);
+		} else if (jqXHR.status == 200) {
+			// 200 status is "Accepted" but really it is an error.
+			var errorMessage = data;
+			alert("Guest not created: " + errorMessage);
+		}
 	});
 }
 

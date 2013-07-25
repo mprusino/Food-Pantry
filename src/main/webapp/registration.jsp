@@ -142,8 +142,8 @@
         </div>
     </fieldset>
     <div class="form-actions">
-	    <a class="btn btn-large" href="#">Cancel <i class="icon-ban-circle"></i></a>
-	    <a class="btn btn-large btn-primary" href="#">Submit <i class="icon-chevron-right icon-white"></i></a>
+	    <a class="btn btn-large" href="#" id="cancel">Cancel <i class="icon-ban-circle"></i></a>
+	    <a class="btn btn-large btn-primary" href="#" id="submit">Submit <i class="icon-chevron-right icon-white"></i></a>
         <tt>{{registrationForm.$valid}}</tt><br/>
         <tt>{{registrationForm.$error}}</tt><br/>
     </div>
