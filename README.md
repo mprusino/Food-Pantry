@@ -1,4 +1,12 @@
-Overview
+Requirements
+
+The role of this food pantry application is to :
+* Register new guests
+* Track orders
+* Report on the data for funding purposes
+
+
+Technologies Involved
 
 This is meant to explain why a particular technology is used.
 

@@ -1,6 +1,0 @@
-Requirements
-
-The role of this food pantry application is to :
-* Register new guests
-* Track orders
-* Report on the data for funding purposes
