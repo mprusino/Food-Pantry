@@ -12,7 +12,16 @@
 </head>
 <body ng-controller="RegistrationCtrl">
 <div class="container span9">
-<h2>New Guest Registration</h2>
+<div class="navbar">
+    <div class="navbar-inner">
+    <a class="brand" href="#">Food Pantry</a>
+    <ul class="nav">
+        <li class="active"><a href="#">New Guest Registration</a></li>
+        <li><a href="#">New Order</a></li>
+        <li><a href="#">Reports</a></li>
+    </ul>
+    </div>
+</div>
 <form name="registrationForm" id="registrationForm" class="form-horizontal" action="/services/guest">
     <fieldset>
         <h4 >Personal Information</h4>
