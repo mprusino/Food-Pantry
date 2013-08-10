@@ -72,7 +72,7 @@
         <hr>
         </div>
         <div class="control-group {{childrenError}}">
-            <label class="control-label" for="children">Children (age 0-18)</label>
+            <label class="control-label" for="children">Number of Children<br/>(age 0-18)</label>
             <div class="controls">
                 <input
                     placeholder="Children (age 0-18)"
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="control-group {{adultsError}}">
-            <label class="control-label" for="adults">Adults (age 18-65)</label>
+            <label class="control-label" for="adults">Number of Adults<br/>(age 18-65)</label>
             <div class="controls">
                 <input
                     placeholder="Adults (age 18-65)"
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div class="control-group {{seniorsError}}">
-            <label class="control-label" for="seniors">Seniors (age 65+)</label>
+            <label class="control-label" for="seniors">Number of Seniors<br/>(age 65+)</label>
             <div class="controls">
                 <input
                     placeholder="Seniors (age 65+)"
@@ -130,7 +130,7 @@
         </div>
         <div class="control-group">
             <!-- Should be the sum Children Adults and Seniors -->
-            <label class="control-label" for="total">Total</label>
+            <label class="control-label" for="total">Total Family Members</label>
             <div class="controls">
                 <input
                     class="text-right"
