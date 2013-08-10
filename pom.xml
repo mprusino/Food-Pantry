@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>Food-Pantry Parent Project</name>
     <url>http://newlifefellowship.org/</url>
-    <description>New Life Felloship Food Pantry Web Application</description>
+    <description>New Life Fellowship Food Pantry Web Application</description>
 
     <properties>
         <jettyVersion>8.1.11.v20130520</jettyVersion>
