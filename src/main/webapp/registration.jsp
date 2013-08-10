@@ -8,11 +8,11 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
     <script src="js/registration.js"></script>
-    <title>Guest Information</title>
+    <title>New Guest Registration</title>
 </head>
 <body ng-controller="RegistrationCtrl">
 <div class="container span9">
-<h2>Guest Information</h2>
+<h2>New Guest Registration</h2>
 <form name="registrationForm" id="registrationForm" class="form-horizontal" action="/services/guest">
     <fieldset>
         <h4 >Personal Information</h4>
