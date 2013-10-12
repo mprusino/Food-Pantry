@@ -1,0 +1,16 @@
+[ {
+	"first" : "Thomas",
+	"last" : "Jefferson",
+	"address" : "48-77 12th St. Astoria, NY 11103"
+}, {
+	"first" : "Krissy",
+	"last" : "Lee",
+	"address" : "123 Grand Ave. Forest Hills, NY 11101"
+}, {
+	"first" : "Joe",
+	"last" : "Smith"
+}, {
+    "first" : "Ricky",
+    "last" : "Ricardo",
+    "address" : "456 Main St. Northport, NY 11768"
+} ]

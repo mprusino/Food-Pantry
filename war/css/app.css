@@ -1,0 +1,16 @@
+.spacer {
+    height: 1em;
+}
+
+.pad-left {
+    padding-left: 10px;
+}
+
+.pad-top {
+    padding-top: 10px;
+}
+
+#guest-panel {
+    height: 600px;
+    overflow-y: scroll;
+}
