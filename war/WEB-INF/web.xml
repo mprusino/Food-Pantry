@@ -24,6 +24,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <servlet-name>ZipCodeServlet</servlet-name>
         <servlet-class>org.nlf.fp.ZipCodeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VolunteerServlet</servlet-name>
+        <servlet-class>org.nlf.fp.VolunteerServlet</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -42,6 +46,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <url-pattern>/zipCode/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>VolunteerServlet</servlet-name>
+        <url-pattern>/volunteer/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>FoodPantryPage</servlet-name>
         <url-pattern>/food-pantry!</url-pattern>
     </servlet-mapping>
@@ -51,6 +59,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <filter-class>org.nlf.fp.AuthenticationFilter</filter-class>
     </filter>
     
+    <!--
+        Un-comment to require a user to be authenticated.
+        Keep commented for testing using curl.
+     -->
+    <!--
     <filter-mapping>
         <filter-name>authenticationFilter</filter-name>
         <servlet-name>FoodPantryPage</servlet-name>
@@ -67,6 +80,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
         <filter-name>authenticationFilter</filter-name>
         <servlet-name>ZipCodeServlet</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <servlet-name>VolunteerServlet</servlet-name>
+    </filter-mapping>
+     -->
 
     <security-constraint>
         <web-resource-collection>
