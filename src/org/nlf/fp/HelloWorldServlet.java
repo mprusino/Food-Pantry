@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Singleton
-public class MyServlet extends HttpServlet {
+public class HelloWorldServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override

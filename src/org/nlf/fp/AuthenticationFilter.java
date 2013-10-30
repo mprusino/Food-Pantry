@@ -2,6 +2,7 @@ package org.nlf.fp;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.inject.Singleton;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * filter is intended to make sure that the user has been authenticated,
  * redirecting the user to the login servlet if the user has not been.
  */
+@Singleton
 public class AuthenticationFilter implements Filter {
     @Override
     public void destroy() {
