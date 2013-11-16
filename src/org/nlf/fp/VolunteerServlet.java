@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.KeyRange;
+import com.google.inject.Singleton;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Singleton
 public class VolunteerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(VolunteerServlet.class.getSimpleName());

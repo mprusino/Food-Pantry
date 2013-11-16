@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.KeyRange;
+import com.google.inject.Singleton;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -31,6 +32,7 @@ import java.util.logging.Logger;
  * <li>HTTP HEAD requests to return the number of guests in the system
  * </ul>
  */
+@Singleton
 public class GuestServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger("GuestServlet");
