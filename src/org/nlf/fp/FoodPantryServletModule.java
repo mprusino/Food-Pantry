@@ -7,6 +7,9 @@ public class FoodPantryServletModule extends ServletModule {
     protected void configureServlets() {
         serve("/login*").with(LoginServlet.class);
 
+        serve("/food-pantry*").with(IndexServlet.class);
+        filter("/food-pantry*").through(AuthenticationFilter.class);
+
         serve("/guest*").with(GuestServlet.class);
         filter("/guest*").through(AuthenticationFilter.class);
 
@@ -18,8 +21,5 @@ public class FoodPantryServletModule extends ServletModule {
 
         serve("/volunteer*").with(VolunteerServlet.class);
         filter("/volunteer*").through(AuthenticationFilter.class);
-
-        serve("/food-pantry*").with(IndexServlet.class);
-        filter("/food-pantry*").through(AuthenticationFilter.class);
     }
 }
