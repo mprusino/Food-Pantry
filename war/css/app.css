@@ -14,3 +14,36 @@
     height: 600px;
     overflow-y: scroll;
 }
+
+input.ng-invalid.ng-dirty {
+    background-color: #FFF0F0;
+}
+
+input.ng-invalid.ng-pristine {
+    /** background-color: #FFFFFA; */
+}
+
+.css-form input.ng-valid {
+    /** background-color: #FAFFFA; */
+}
+
+.combobox-container {
+    z-index: 10;
+}
+
+.label-muted {
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: #CCCCCC;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #EEEEEE;
+    width: 7em;
+    padding: 4px 6px 4px 6px;
+    text-align: left;
+    margin: 0;
+}
+
+.newguest-carousel {
+    height: 260px;
+}

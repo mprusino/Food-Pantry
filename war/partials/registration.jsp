@@ -1,60 +1,134 @@
-<form>
-    <fieldset>
-        <legend>Personal Information</legend>
-        <div class="row">
-            <div class="span3 offset1">
-                <label for="firstName">First Name</label>
-                <input type="text" name="firstName" placeholder="First Name" required/>
-            </div>
-            <div class="span3">
-                <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" placeholder="Last Name" required/>
-            </div>
-            <div class="span3">
-                <label for="ethnicity">Ethnicity</label>
-                <div class="btn-group" data-toggle="buttons-radio">
-                    <button type="button" class="btn">Asian</button>
-                    <button type="button" class="btn">Black</button>
-                    <button type="button" class="btn">Latino</button>
-                    <button type="button" class="btn">White</button>
-                    <button type="button" class="btn">Other</button>
+<div id="myCarousel" class="span4">
+    <fieldset ng-form="mainform">
+        <legend>New Guest</legend>
+        <div class="progress">
+            <div class="bar" style="width: 12.5%;"
+                ng-show="name.firstName.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="name.lastName.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="race.ethnicitytext.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="address.address.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="address.zipCode.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="family.adults.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="family.seniors.$valid"></div>
+            <div class="bar" style="width: 12.5%;"
+                ng-show="family.children.$valid"></div>
+        </div>
+        <div class="carousel-inner">
+            <div class="active item span4">
+                <fieldset class="newguest-carousel" ng-form="name">
+                    <div class="input-prepend">
+                        <span class="add-on" style="width: 5em;">First
+                            Name</span> <input type="text" class="input-medium"
+                            name="firstName" ng-model="guest.firstName"
+                            required />
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on" style="width: 5em;">Last
+                            Name</span> <input type="text" class="input-medium"
+                            name="lastName" ng-model="guest.lastName"
+                            required />
+                    </div>
+                </fieldset>
+                <div class="well text-right">
+                    <button class="btn btn-primary" onclick="next();">
+                        Next <i class="icon-chevron-right icon-white"></i>
+                    </button>
                 </div>
             </div>
-        </div>
-        <legend>Address</legend>
-        <div class="row">
-            <div class="span3 offset1">
-                <label for="address" class="control-label">Address</label>
-                <input type="text" name="address" placeholder="Address" required/>
+            <div class="item span4">
+                <fieldset class="newguest-carousel" ng-form="race">
+                    <input type="hidden" name="ethnicitytext" required
+                        value="{{guest.ethnicity}}"
+                        ng-model="guest.ethnicity" /> <label
+                        class="radio"> <input type="radio"
+                        name="ethnicity" ng-model="guest.ethnicity"
+                        value="A">Asian
+                    </label> <label class="radio"> <input type="radio"
+                        name="ethnicity" ng-model="guest.ethnicity"
+                        value="B">Black
+                    </label> <label class="radio"> <input type="radio"
+                        name="ethnicity" ng-model="guest.ethnicity"
+                        value="L">Latino
+                    </label> <label class="radio"> <input type="radio"
+                        name="ethnicity" ng-model="guest.ethnicity"
+                        value="W">White
+                    </label> <label class="radio"> <input type="radio"
+                        name="ethnicity" ng-model="guest.ethnicity"
+                        value="O">Other
+                    </label>
+                </fieldset>
+                <div class="well text-right">
+                    <button class="btn btn-primary" onclick="next();">
+                        Next <i class="icon-chevron-right icon-white"></i>
+                    </button>
+                </div>
             </div>
-            <div class="span6">
-                <label for="zipCode" class="control-label">Zip Code</label>
-                <select class="combobox" id="zipCode" name="zipCode" required>
-                    <option value="">City, State Zip Code</option>
-                </select>
+            <div class="item span4">
+                <fieldset class="newguest-carousel" ng-form="address">
+                    <label for="zipCode" class="label-muted">Address</label>
+                    <input type="text" required name="address"
+                        ng-model="guest.address" /> <label
+                        for="zipCode" class="label-muted">Zip
+                        Code</label> <select class="combobox" id="zipCode"
+                        name="zipCode" required ng-model="guest.zipCode">
+                        <option value="">City, State Zip Code</option>
+                    </select>
+                </fieldset>
+                <div class="well text-right">
+                    <button class="btn btn-primary" onclick="next(); initFamily();">
+                        Next <i class="icon-chevron-right icon-white"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <legend>Total Family Members</legend>
-        <div class="row">
-            <div class="span3 offset1">
-                <label for="adults" class="control-label">Adults</label>
-                <input type="text" name="adults" placeholder="Adults" value="1" required/>
+            <div class="item span4">
+                <fieldset class="newguest-carousel" ng-form="family">
+                    <div class="input-prepend">
+                        <span class="add-on" style="width: 5em;">Adults</span>
+                        <input type="number" required integer min="1"
+                            max="20" name="adults"
+                            ng-model="guest.adults" class="input-mini" />
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on" style="width: 5em;">Seniors</span>
+                        <input type="number" required integer min="0"
+                            max="20" name="seniors"
+                            ng-model="guest.seniors" class="input-mini" />
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on" style="width: 5em;">Children</span>
+                        <input type="number" required integer min="0"
+                            max="20" name="children"
+                            ng-model="guest.children" class="input-mini" />
+                    </div>
+                </fieldset>
+                <div class="well text-right">
+                    <button class="btn btn-primary"
+                        ng-click="postForm()"
+                        ng-disabled="form.$invalid">
+                        Submit <i class="icon-chevron-right icon-white"></i>
+                    </button>
+                </div>
             </div>
-            <div class="span3">
-                <label for="Seniors" class="control-label">Seniors</label>
-                <input type="text" name="seniors" placeholder="Seniors" value="0" required/>
-            </div>
-            <div class="span3">
-                <label for="children" class="control-label">Children</label>
-                <input type="text" name="children" placeholder="Children" value="0" required/>
-            </div>
+
         </div>
     </fieldset>
-    <div class="form-actions row">
-        <div class="offset8">
-            <button class="btn btn-large btn-primary" ng-click="postForm()">
-                Submit <i class="icon-chevron-right icon-white"></i>
-            </button>
-        </div>
-    </div>
-</form>
+</div>
+
+<script>
+	function next() {
+		$('#myCarousel').carousel('next');
+		$('#myCarousel').carousel('pause');
+	}
+	function initFamily() {
+		
+		if ($('input[name="adults"]').val() == "") {
+		    $('input[name="adults"]').val("1");
+		}
+	}
+</script>
