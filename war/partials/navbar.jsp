@@ -6,15 +6,17 @@
     final String suffix = userService.isUserAdmin() ? " (admin)" : "";
     final String nickName = userService.getCurrentUser().getNickname() + suffix;
 %>
-<div class="navbar navbar-inverse" ng-controller="NavbarCtrl">
+<div class="navbar" ng-controller="NavbarCtrl">
     <div class="navbar-inner">
         <div class="container">
             <div class="nav-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li class="navbar-search pull-left">
+                        <input id="guestSearch" type="text" class="search-query" placeholder="Guest Search..." autocomplete="off"/>
+                    </li>
                     <li ng-repeat="route in navbarLinks" class="{{route.active}}">
                         <a href="/food-pantry!\#{{route.linkUrl}}">{{route.title}}</a>
                     </li>
-        
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <%=nickName%><b class="caret"></b>
@@ -28,3 +30,28 @@
         </div>
     </div>
 </div>
+
+<script>
+$(function() {
+	$('#guestSearch').select2({
+		placeholder : 'Guest Search...',
+		minimumInputLength : 1,
+		query : function(query) {
+			var data = {
+				results : []
+			}, i, j, s;
+			for (i = 1; i < 5; i++) {
+				s = "";
+				for (j = 0; j < i; j++) {
+					s = s + query.term;
+				}
+				data.results.push({
+					id : query.term + i,
+					text : s
+				});
+			}
+			query.callback(data);
+		}
+	});
+});
+</script>

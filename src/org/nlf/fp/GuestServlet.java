@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,10 +45,12 @@ public class GuestServlet extends HttpServlet {
     }
 
     private void dispatchGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        if (req.getParameter("guestId") == null) {
-            getAllGuests(req, resp);
-        } else {
+        if (req.getParameter("guestId") != null) {
             getSingleGuest(req, resp);
+        } else if (req.getParameter("firstName") != null && req.getParameter("lastName") != null) {
+            getGuestsFromSearch(req, resp);
+        } else if (req.getParameterMap().isEmpty()) {
+            getAllGuests(req, resp);
         }
     }
 
@@ -76,6 +80,44 @@ public class GuestServlet extends HttpServlet {
                     .writeValueAsString(guests);
             //@formatter:on
             resp.getWriter().println(json);
+        } finally {
+            q.closeAll();
+            pm.close();
+        }
+    }
+
+    private void getGuestsFromSearch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+        final String firstName = req.getParameter("firstName");
+        final String lastName = req.getParameter("lastName");
+        final PersistenceManager pm = PMF.get().getPersistenceManager();
+        final Query q = pm.newQuery(Guest.class);
+        try {
+            q.setFilter("firstName.startsWith(givenFirstName)");
+            q.setOrdering("firstName asc, lastName asc");
+            q.declareParameters("String givenFirstName");
+
+            @SuppressWarnings("unchecked")
+            final List<Guest> guestsFromSearch = new ArrayList<Guest>((List<Guest>) q.execute(firstName));
+            if (lastName != null) {
+                for (final Iterator<Guest> i = guestsFromSearch.iterator(); i.hasNext();) {
+                    final Guest guest = i.next();
+                    if (!guest.getLastName().startsWith(lastName)) {
+                        i.remove();
+                    }
+                }
+            }
+            final ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
+
+            //@formatter:off
+            final String json = mapper
+                    .writerWithView(Guest.Views.ForOrderScreen.class)
+                    .writeValueAsString(guestsFromSearch);
+            //@formatter:on
+            resp.getWriter().println(json);
+        } catch (final Exception e) {
+            e.printStackTrace();
+            resp.setStatus(404);
         } finally {
             q.closeAll();
             pm.close();
