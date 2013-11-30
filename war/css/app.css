@@ -38,10 +38,25 @@ input.ng-invalid.ng-pristine {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     background-color: #EEEEEE;
-    width: 7em;
     padding: 4px 6px 4px 6px;
     text-align: left;
     margin: 0;
+}
+
+.em5 {
+    width: 5em !important;
+}
+
+.em6 {
+    width: 6em;
+}
+
+.em7 {
+    width: 7em;
+}
+
+.px150 {
+    width: 165px !important;
 }
 
 .newguest-carousel {

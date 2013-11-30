@@ -19,9 +19,9 @@ public class LoginServlet extends HttpServlet {
         final UserService userService = UserServiceFactory.getUserService();
         resp.setContentType("text/html");
         if (req.getUserPrincipal() != null) {
-            resp.sendRedirect("/food-pantry!#/order");
+            resp.sendRedirect("/food-pantry!#/landing");
         } else {
-            resp.sendRedirect(userService.createLoginURL("/food-pantry!#/order"));
+            resp.sendRedirect(userService.createLoginURL("/food-pantry!#/landing"));
         }
     }
 }

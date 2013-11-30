@@ -2,43 +2,53 @@
 
 var app = angular.module('food-pantry', []).config(
 		[ '$routeProvider', function($routeProvider) {
-			$routeProvider.when('/registration', {
+			$routeProvider
+			/*.when('/registration', {
 				templateUrl : 'partials/registration.jsp',
 				controller : RegistrationCtrl,
 				title : "New Guest Registration",
 				linkUrl : "/registration"
-			}).when('/order', {
+			})*/
+			.when('/order', {
 				templateUrl : 'partials/order.jsp',
 				controller : OrderCtrl,
-				title : "Order Entry",
+				title : "Guests",
 				linkUrl : "/order"
-			}).when('/reporting', {
+			})
+			.when('/reporting', {
 				templateUrl : 'partials/reporting.jsp',
 				controller : ReportingCtrl,
 				title : "Reporting",
 				linkUrl : "/reporting"
-			}).when('/admin', {
+			})
+			.when('/admin', {
 				templateUrl : 'partials/admin.jsp',
 				controller : AdminCtrl,
 				title : "Admin",
 				linkUrl : "/admin"
-			}).when('/volunteer', {
+			})
+			.when('/volunteer', {
 				templateUrl : 'partials/volunteer.jsp',
-				controller : VolunteerCtrl,
-				title : "New Volunteer",
-				linkUrl : "/volunteer"
-			}).when('/schedule', {
+				controller : VolunteerCtrl
+			})
+			/*.when('/schedule', {
 				templateUrl : 'partials/schedule.jsp',
 				controller : ScheduleCtrl,
 				title : "Schedule",
 				linkUrl : "/schedule"
-			}).when('/documents', {
+			})*/
+			/*.when('/documents', {
 				templateUrl : 'partials/documents.jsp',
 				controller : DocumentsCtrl,
 				title: "Documents",
 				linkUrl : "/documents"
-			}).otherwise({
-				redirectTo : '/order'
+			})*/
+			.when('/landing', {
+				templateUrl : 'partials/landing.jsp',
+				controller : LandingCtrl
+			})
+			.otherwise({
+				redirectTo : '/landing'
 			});
 		} ]);
 

@@ -19,6 +19,7 @@
 <script src="js/app.js"></script>
 <script src="js/controllers/admin.js"></script>
 <script src="js/controllers/documents.js"></script>
+<script src="js/controllers/landing.js"></script>
 <script src="js/controllers/navbar.js"></script>
 <script src="js/controllers/order.js"></script>
 <script src="js/controllers/registration.js"></script>
