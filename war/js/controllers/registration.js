@@ -8,7 +8,7 @@ function RegistrationCtrl($scope, $http) {
 				+ value.city + ", " + value.state + " " + value.zipCode
 				+ "</option>");
 		});
-		$('#zipCode').combobox();
+		//$('#zipCode').combobox();
 	});
 	$scope.postForm = function() {
 		var guest = {};

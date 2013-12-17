@@ -30,123 +30,181 @@
     tabindex="-1"
     role="dialog"
     aria-labelledby="guestModalLabel"
-    aria-hidden="true">
-    <div class="modal-header">
-        <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-hidden="true">&times;</button>
-        <h3 id="myModalLabel">New Guest</h3>
-    </div>
-    <div class="modal-body">
-        <div class="input-prepend">
-            <label
-                for="firstName"
-                class="add-on em5">First Name</label>
-            <input
-                type="text"
-                class="input-medium"
-                name="firstName"
-                ng-model="guest.firstName" />
+    aria-hidden="true"
+    ng-controller="RegistrationCtrl">
+    <form name="guestForm">
+        <div class="modal-header">
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+            <h3 id="myModalLabel">New Guest</h3>
         </div>
-        <div class="input-prepend">
-            <label
-                for="lastName"
-                class="add-on em5">Last Name</label>
-            <input
-                type="text"
-                class="input-medium"
-                name="lastName"
-                ng-model="guest.lastName" />
-        </div>
-        <div class="input-prepend">
-            <label
-                for="address"
-                class="add-on em5">Address</label>
-            <input
-                type="text"
-                class="input-medium"
-                name="address"
-                ng-model="guest.address" />
-        </div>
-        <div class="input-prepend">
-            <label
-                for="zipCode"
-                class="add-on em5">Zip Code</label>
-            <select
-                class="px150"
-                id="zipCode"
-                name="zipCode"
-                ng-model="guest.zipCode">
-            </select>
-        </div>
-        <div>
+        <div class="modal-body">
             <div class="input-prepend">
                 <label
-                    for="adults"
-                    class="add-on"
-                    style="width: 5em;">Adults</label>
+                    for="firstName"
+                    class="add-on em5">First Name</label>
                 <input
-                    type="number"
-                    integer
-                    min="1"
-                    max="20"
-                    name="adults"
-                    ng-model="guest.adults"
-                    class="input-mini" />
+                    type="text"
+                    class="input-medium"
+                    name="firstName"
+                    ng-model="guest.firstName"
+                    required />
             </div>
             <div class="input-prepend">
                 <label
-                    for="seniors"
-                    class="add-on"
-                    style="width: 5em;">Seniors</label>
+                    for="lastName"
+                    class="add-on em5">Last Name</label>
                 <input
-                    type="number"
-                    integer
-                    min="0"
-                    max="20"
-                    name="seniors"
-                    ng-model="guest.seniors"
-                    class="input-mini" />
+                    type="text"
+                    class="input-medium"
+                    name="lastName"
+                    ng-model="guest.lastName"
+                    required />
             </div>
             <div class="input-prepend">
                 <label
-                    for="children"
-                    class="add-on"
-                    style="width: 5em;">Children</label>
+                    for="address"
+                    class="add-on em5">Address</label>
                 <input
-                    type="number"
-                    integer
-                    min="0"
-                    max="20"
-                    name="children"
-                    ng-model="guest.children"
-                    class="input-mini" />
+                    type="text"
+                    class="input-medium"
+                    name="address"
+                    ng-model="guest.address"
+                    required />
+            </div>
+            <div class="input-prepend">
+                <label
+                    for="zipCode"
+                    class="add-on em5">Zip Code</label>
+                <select
+                    class="px150"
+                    id="zipCode"
+                    name="zipCode"
+                    ng-model="guest.zipCode"
+                    required>
+                </select>
+            </div>
+            <div>
+                <div class="input-prepend">
+                    <label
+                        for="adults"
+                        class="add-on"
+                        style="width: 5em;">Adults</label>
+                    <input
+                        type="number"
+                        integer
+                        min="1"
+                        max="20"
+                        name="adults"
+                        ng-model="guest.adults"
+                        class="input-mini"
+                        required />
+                </div>
+                <div class="input-prepend">
+                    <label
+                        for="seniors"
+                        class="add-on"
+                        style="width: 5em;">Seniors</label>
+                    <input
+                        type="number"
+                        integer
+                        min="0"
+                        max="20"
+                        name="seniors"
+                        ng-model="guest.seniors"
+                        class="input-mini"
+                        required />
+                </div>
+                <div class="input-prepend">
+                    <label
+                        for="children"
+                        class="add-on"
+                        style="width: 5em;">Children</label>
+                    <input
+                        type="number"
+                        integer
+                        min="0"
+                        max="20"
+                        name="children"
+                        ng-model="guest.children"
+                        ng-changed="guestFormChanged()"
+                        class="input-mini"
+                        required />
+                </div>
+            </div>
+            <div class="btn-group">
+                <button
+                    type="button"
+                    class="btn"
+                    ng-model="guest.ethnicity"
+                    btn-radio="'A'">Asian</button>
+                <button
+                    type="button"
+                    class="btn"
+                    ng-model="guest.ethnicity"
+                    btn-radio="'B'">Black</button>
+                <button
+                    type="button"
+                    class="btn"
+                    ng-model="guest.ethnicity"
+                    btn-radio="'L'">Latino</button>
+                <button
+                    type="button"
+                    class="btn"
+                    ng-model="guest.ethnicity"
+                    btn-radio="'W'">White</button>
+                <button
+                    type="button"
+                    class="btn"
+                    ng-model="guest.ethnicity"
+                    btn-radio="'O'">Other</button>
             </div>
         </div>
-        <div
-            class="btn-group text-center"
-            data-toggle="buttons-radio">
-            <button class="btn">Asian</button>
-            <button class="btn">Black</button>
-            <button class="btn">Latino</button>
-            <button class="btn">White</button>
-            <button class="btn">Other</button>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <div
-            class="progress span5"
-            style="margin-top: 2px;">
+        <div class="modal-footer">
             <div
-                class="bar"
-                style="width: 60%;"></div>
+                class="progress progress-striped active span5"
+                style="margin-top: 2px;">
+                <div
+                    ng-show="guest.firstName"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.lastName"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.address"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.zipCode"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.adults"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.seniors"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.children"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+                <div
+                    ng-show="guest.ethnicity"
+                    class="bar"
+                    style="width: 12.5%;"></div>
+            </div>
+            <button class="btn btn-primary" ng-disabled="guestForm.$invalid||(!guest.ethnicity)">
+                Save <i class="icon-chevron-right icon-white"></i>
+            </button>
         </div>
-        <button class="btn btn-primary">
-            Save <i class="icon-chevron-right icon-white"></i>
-        </button>
-    </div>
+    </form>
 </div>
 <div
     id="foodModal"

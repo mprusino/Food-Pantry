@@ -16,6 +16,7 @@
 <script src="js/third-party/bootstrap-combobox.js"></script>
 <script src="js/third-party/bootstrap-datepicker.js"></script>
 <script src="js/third-party/select2.min.js"></script>
+<script src="js/third-party/ui-bootstrap-custom-tpls-0.7.0.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers/admin.js"></script>
 <script src="js/controllers/documents.js"></script>

@@ -62,3 +62,7 @@ input.ng-invalid.ng-pristine {
 .newguest-carousel {
     height: 260px;
 }
+
+form[name='guestForm'] {
+    margin-bottom: 0px !important;
+}

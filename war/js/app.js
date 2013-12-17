@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('food-pantry', []).config(
+var app = angular.module('food-pantry', ['ui.bootstrap']).config(
 		[ '$routeProvider', function($routeProvider) {
 			$routeProvider
 			/*.when('/registration', {
