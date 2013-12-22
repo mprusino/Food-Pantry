@@ -164,9 +164,10 @@
             </div>
         </div>
         <div class="modal-footer">
+            <!-- Not displaying because for now I'm not sure how to get the seniors & children to work with values of 0. -->
             <div
-                class="progress progress-striped active span5"
-                style="margin-top: 2px;">
+                class="progress active span5"
+                style="margin-top: 2px; display:none;">
                 <div
                     ng-show="guest.firstName"
                     class="bar"
