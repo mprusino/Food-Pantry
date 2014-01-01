@@ -15,6 +15,14 @@ public class Utilities {
         }
     }
 
+    public static String formatAsFullDate(final Date date) {
+        if (date == null) {
+            return null;
+        } else {
+            return new SimpleDateFormat("EEE MMMM d yyyy").format(date);
+        }
+    }
+
     public static Date parseAsMMddyyyy(final String date) throws ParseException {
         return date == null ? null : new SimpleDateFormat("MM/dd/yyyy").parse(date);
     }

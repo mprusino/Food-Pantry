@@ -17,17 +17,13 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @PersistenceCapable
-public class Order {
+public class ClothingOrder {
     @JsonIgnore
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
     @Persistent
     private long guestId;
-    @Persistent
-    private boolean forFood;
-    @Persistent
-    private boolean forClothing;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy", timezone = "UTC")
     @Persistent
     private Date orderDate;
@@ -54,42 +50,20 @@ public class Order {
     }
 
     @JsonView(Views.ForOrderScreen.class)
-    public boolean isForFood() {
-        return forFood;
-    }
-
-    public void setForFood(final boolean forFood) {
-        this.forFood = forFood;
-    }
-
-    @JsonView(Views.ForOrderScreen.class)
-    public boolean isForClothing() {
-        return forClothing;
-    }
-
-    public void setForClothing(final boolean forClothing) {
-        this.forClothing = forClothing;
-    }
-
-    @JsonView(Views.ForOrderScreen.class)
     public Date getOrderDate() {
         return orderDate;
+    }
+
+    @JsonView(Views.ForOrderScreen.class)
+    public String getOrderDateAsString() {
+        return Utilities.formatAsFullDate(orderDate);
     }
 
     public void setOrderDate(final Date orderDate) {
         this.orderDate = Utilities.toUtc(orderDate);
     }
 
-    // @JsonView(Views.ForOrderScreen.class)
-    // public String getFormattedOrderDate() {
-    // return Utilities.formatAsMMddyyyy(orderDate);
-    // }
-    //
-    // public void setFormattedOrderDate(final String orderDate) {
-    // try {
-    // this.orderDate = Utilities.parseAsMMddyyyy(orderDate);
-    // } catch (final ParseException e) {
-    // this.orderDate = null;
-    // }
-    // }
+    public void setOrderDateToToday() {
+        this.orderDate = Utilities.toUtc(new Date());
+    }
 }

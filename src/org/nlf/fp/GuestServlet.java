@@ -126,7 +126,7 @@ public class GuestServlet extends HttpServlet {
         try {
             guest.setKey(keyRange.getStart());
             pm.makePersistent(guest);
-            resp.getWriter().println(guest.getKey().getId());
+            resp.getWriter().print(guest.getKey().getId());
         } finally {
             pm.close();
         }

@@ -13,8 +13,11 @@ public class FoodPantryServletModule extends ServletModule {
         serve("/guest*").with(GuestServlet.class);
         filter("/guest*").through(AuthenticationFilter.class);
 
-        serve("/order*").with(OrderServlet.class);
-        filter("/order*").through(AuthenticationFilter.class);
+        serve("/food*").with(FoodServlet.class);
+        filter("/food*").through(AuthenticationFilter.class);
+
+        serve("/clothing*").with(ClothingServlet.class);
+        filter("/clothing*").through(AuthenticationFilter.class);
 
         serve("/zipCode*").with(ZipCodeServlet.class);
         filter("/zipCode*").through(AuthenticationFilter.class);

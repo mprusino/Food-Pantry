@@ -2,6 +2,8 @@
 
 function GuestsCtrl($scope, $route, $routeParams, $location, $http) {
 	$scope.query = "";
+	$scope.loadedGuestFoodOrders = [];
+	$scope.loadedGuestClothingOrders = [];
 	
 	$scope.guestSearch = function() {
 		//alert('search clicked!');
@@ -13,7 +15,31 @@ function GuestsCtrl($scope, $route, $routeParams, $location, $http) {
 	
 	$scope.loadGuest = function(guest) {
 		$scope.loadedGuest = guest;
+		
+		//alert('loading guest with id ' + $scope.loadedGuest.id);
+		$http.get('/food?guestId=' + $scope.loadedGuest.id).success(function(data) {
+			console.log(data);
+			$scope.loadedGuestFoodOrders = data;
+		});
+		$http.get('/clothing?guestId=' + $scope.loadedGuest.id).success(function(data) {
+			console.log(data);
+			$scope.loadedGuestClothingOrders = data;
+		});
 	};
+	
+	$scope.createFoodOrder = function() {
+		//alert('create food order clicked!' + $scope.loadedGuest.id);
+		$http.post('/food', $scope.loadedGuest.id).success(function(data) {
+			console.log(data);
+		});
+	}
+	
+	$scope.createClothingOrder = function() {
+		alert('create clothing order clicked! ' + $scope.loadedGuest.id);
+		$http.post('/clothing', $scope.loadedGuest.id).success(function(data) {
+			console.log(data);
+		});
+	}
 }
 
 function NewGuestCtrl($scope, $route, $routeParams, $location, $http) {

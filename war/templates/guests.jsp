@@ -78,9 +78,8 @@
                     <i class="icon-shopping-cart"></i> Food Order History
                 </h6>
                 <ul class="unstyled">
-                    <li>Saturday November 30, 2013</li>
-                    <li>Saturday November 23, 2013</li>
-                    <li>Saturday November 16, 2013</li>
+                    <li ng-repeat="order in loadedGuestFoodOrders">{{order.orderDateAsString}}</li>
+                    <li ng-hide="loadedGuestFoodOrders">(No history)</li>
                 </ul>
             </div>
             <div class="span6">
@@ -88,7 +87,8 @@
                     <i class="icon-gift"></i> Clothing Order History
                 </h6>
                 <ul class="unstyled">
-                    <li>(No history)</li>
+                    <li ng-repeat="order in loadedGuestClothingOrders">{{order.orderDateAsString}}</li>
+                    <li ng-hide="loadedGuestClothingOrders">(No history)</li>
                 </ul>
             </div>
         </div>
@@ -97,9 +97,7 @@
                 <button
                     type="button"
                     class="btn btn-small"
-                    data-toggle="modal"
-                    data-backdrop="static"
-                    data-target="#foodModal">
+                    ng-click="createFoodOrder()">
                     <i class="icon-shopping-cart"></i> Create Today's Food Order
                 </button>
             </div>
@@ -107,9 +105,7 @@
                 <button
                     type="button"
                     class="btn btn-small"
-                    data-toggle="modal"
-                    data-backdrop="static"
-                    data-target="#clothingModal">
+                    ng-click="createClothingOrder()">
                     <i class="icon-gift"></i> Create Today's Clothing Order
                 </button>
             </div>

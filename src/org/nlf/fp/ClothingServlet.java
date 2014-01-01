@@ -1,6 +1,6 @@
 package org.nlf.fp;
 
-import org.nlf.fp.models.Order;
+import org.nlf.fp.models.ClothingOrder;
 
 import org.apache.commons.io.IOUtils;
 
@@ -23,12 +23,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This servlet is for getting and posting new orders.
+ * This servlet is for getting and posting clothing orders.
  */
 @Singleton
-public class OrderServlet extends HttpServlet {
+public class ClothingServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = Logger.getLogger(OrderServlet.class.getSimpleName());
+    private static final Logger logger = Logger.getLogger(ClothingServlet.class.getSimpleName());
 
     @Override
     public void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
@@ -36,20 +36,15 @@ public class OrderServlet extends HttpServlet {
     }
 
     private void dispatchGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        if (req.getParameter("guestId") == null) {
-            getAllOrders(req, resp);
-        } else {
-            getOrdersForGuest(req, resp);
+        if (req.getParameter("guestId") != null) {
+            getClothingOrdersForGuest(req, resp);
         }
     }
 
-    private void getAllOrders(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-
-    }
-
-    private void getOrdersForGuest(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+    private void getClothingOrdersForGuest(final HttpServletRequest req, final HttpServletResponse resp)
+            throws IOException {
         final PersistenceManager pm = PMF.get().getPersistenceManager();
-        final Query q = pm.newQuery(Order.class);
+        final Query q = pm.newQuery(ClothingOrder.class);
 
         try {
             q.setFilter("guestId == givenGuestId");
@@ -58,14 +53,14 @@ public class OrderServlet extends HttpServlet {
 
             final Long guestId = Long.parseLong(req.getParameter("guestId"));
             @SuppressWarnings("unchecked")
-            final List<Order> ordersForGuest = (List<Order>) q.execute(guestId.longValue());
+            final List<ClothingOrder> clothingOrdersForGuest = (List<ClothingOrder>) q.execute(guestId.longValue());
             final ObjectMapper mapper = new ObjectMapper();
             mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
             //@formatter:off
             final String json = mapper
-                    .writerWithView(Order.Views.ForOrderScreen.class)
-                    .writeValueAsString(ordersForGuest);
+                    .writerWithView(ClothingOrder.Views.ForOrderScreen.class)
+                    .writeValueAsString(clothingOrdersForGuest);
             //@formatter:on
             resp.getWriter().println(json);
         } catch (final Exception e) {
@@ -78,16 +73,19 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     public void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        final String json = IOUtils.toString(req.getInputStream());
-        logger.log(Level.INFO, "Received this JSON:\n" + json + "\nStoring to datastore.");
-        final Order order = JsonMapper.get().readValue(json, Order.class);
+        final long guestId = Long.parseLong(IOUtils.toString(req.getInputStream()));
+        logger.log(Level.INFO, "Received this guest id:\n" + guestId + "\nStoring to datastore.");
+        final ClothingOrder clothingOrder = new ClothingOrder();
+        clothingOrder.setGuestId(guestId);
+        clothingOrder.setOrderDateToToday();
+
         final PersistenceManager pm = PMF.get().getPersistenceManager();
         final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        final KeyRange keyRange = datastore.allocateIds(Order.class.getSimpleName(), 1L);
+        final KeyRange keyRange = datastore.allocateIds(ClothingOrder.class.getSimpleName(), 1L);
         try {
-            order.setKey(keyRange.getStart());
-            pm.makePersistent(order);
-            resp.getWriter().println("Access new order with id: " + order.getKey().getId());
+            clothingOrder.setKey(keyRange.getStart());
+            pm.makePersistent(clothingOrder);
+            resp.getWriter().print(clothingOrder.getKey().getId());
         } finally {
             pm.close();
         }
