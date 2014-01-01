@@ -66,3 +66,7 @@ input.ng-invalid.ng-pristine {
 form[name='guestForm'] {
     margin-bottom: 0px !important;
 }
+
+.spacer {
+    margin-top: 40px;
+}

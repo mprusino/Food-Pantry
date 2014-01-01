@@ -35,4 +35,10 @@ function OrderCtrl($scope, $http) {
 		order['forClothing'] = $('#forClothing').hasClass('active');
 		$http.post('/order', order);
 	}
+	
+	$scope.saveNewGuest = function() {
+		alert('save clicked!');
+		//console.debug($scope.guest);
+		//$http.post('/guest', $scope.guest);
+	}
 }

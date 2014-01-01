@@ -22,4 +22,6 @@ function NavbarCtrl($scope, $route, $location) {
 	$scope.$on('$routeChangeStart', function(next, current) { 
 		$scope.setActiveTab();
 	});
+	
+	$scope.currentDate = new Date().toDateString();
 }

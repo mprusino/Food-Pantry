@@ -13,19 +13,15 @@
         <div class="container">
             <div class="nav-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!-- 
-                    <li class="navbar-search pull-left">
-                        <input id="guestSearch" type="text" class="search-query" placeholder="Guest Search..." autocomplete="off"/>
-                    </li>
-                     -->
                     <li><a
                         class="brand"
-                        href="/food-pantry!#/landing">New Life Fellowship</a></li>
+                        href="/food-pantry!#/landing">New Life CDC</a></li>
                     <li
                         ng-repeat="route in navbarLinks"
                         class="{{route.active}}"><a href="/food-pantry!\#{{route.linkUrl}}">{{route.title}}</a></li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
+                    <li><a href="#">{{currentDate}}</a></li>
                     <li class="dropdown"><a
                         href="#"
                         class="dropdown-toggle"
@@ -39,30 +35,3 @@
         </div>
     </div>
 </div>
-
-<script>
-	/*
-	 $(function() {
-	 $('#guestSearch').select2({
-	 placeholder : 'Guest Search...',
-	 minimumInputLength : 1,
-	 query : function(query) {
-	 var data = {
-	 results : []
-	 }, i, j, s;
-	 for (i = 1; i < 5; i++) {
-	 s = "";
-	 for (j = 0; j < i; j++) {
-	 s = s + query.term;
-	 }
-	 data.results.push({
-	 id : query.term + i,
-	 text : s
-	 });
-	 }
-	 query.callback(data);
-	 }
-	 });
-	 });
-	 */
-</script>

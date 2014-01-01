@@ -18,17 +18,21 @@
 <script src="js/third-party/select2.min.js"></script>
 <script src="js/third-party/ui-bootstrap-custom-tpls-0.7.0.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/controllers/navbar.js"></script>
+<script src="js/controllers/guests.js"></script>
+
 <script src="js/controllers/admin.js"></script>
 <script src="js/controllers/documents.js"></script>
 <script src="js/controllers/landing.js"></script>
-<script src="js/controllers/navbar.js"></script>
+
 <script src="js/controllers/order.js"></script>
 <script src="js/controllers/registration.js"></script>
 <script src="js/controllers/reporting.js"></script>
 <script src="js/controllers/schedule.js"></script>
 <script src="js/controllers/volunteer.js"></script>
-<title>New Life Fellowship -- Food Pantry</title>
+<title>Food and Clothing Pantry | New Life Community Development Center</title>
 </head>
+<%--Look at app.js --%>
 <body ng-app="food-pantry">
     <div ng-include="'/partials/navbar.jsp'"></div>
     <div ng-view class="container"></div>

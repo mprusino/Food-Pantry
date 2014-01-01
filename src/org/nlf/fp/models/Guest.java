@@ -24,6 +24,8 @@ public class Guest {
     @Persistent
     private String ethnicity;
     @Persistent
+    private String lang;
+    @Persistent
     private String address;
     @Persistent
     private String zipCode;
@@ -33,6 +35,8 @@ public class Guest {
     private short adults;
     @Persistent
     private short children;
+    @Persistent
+    private String phone;
 
     public class Views {
         public class ForOrderScreen {
@@ -119,4 +123,21 @@ public class Guest {
     public void setChildren(final short children) {
         this.children = children;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(final String phone) {
+        this.phone = phone;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(final String lang) {
+        this.lang = lang;
+    }
+
 }

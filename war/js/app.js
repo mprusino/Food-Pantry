@@ -3,48 +3,26 @@
 var app = angular.module('food-pantry', ['ui.bootstrap']).config(
 		[ '$routeProvider', function($routeProvider) {
 			$routeProvider
-			/*.when('/registration', {
-				templateUrl : 'partials/registration.jsp',
-				controller : RegistrationCtrl,
-				title : "New Guest Registration",
-				linkUrl : "/registration"
-			})*/
-			.when('/order', {
-				templateUrl : 'partials/order.jsp',
-				controller : OrderCtrl,
+			.when('/guests', {
+				templateUrl : 'templates/guests.jsp',
+				controller : GuestsCtrl,
 				title : "Guests",
-				linkUrl : "/order"
+				linkUrl : "/guests"
 			})
 			.when('/reporting', {
-				templateUrl : 'partials/reporting.jsp',
+				templateUrl : 'templates/reporting.jsp',
 				controller : ReportingCtrl,
 				title : "Reporting",
 				linkUrl : "/reporting"
 			})
 			.when('/admin', {
-				templateUrl : 'partials/admin.jsp',
+				templateUrl : 'templates/admin.jsp',
 				controller : AdminCtrl,
 				title : "Admin",
 				linkUrl : "/admin"
 			})
-			.when('/volunteer', {
-				templateUrl : 'partials/volunteer.jsp',
-				controller : VolunteerCtrl
-			})
-			/*.when('/schedule', {
-				templateUrl : 'partials/schedule.jsp',
-				controller : ScheduleCtrl,
-				title : "Schedule",
-				linkUrl : "/schedule"
-			})*/
-			/*.when('/documents', {
-				templateUrl : 'partials/documents.jsp',
-				controller : DocumentsCtrl,
-				title: "Documents",
-				linkUrl : "/documents"
-			})*/
 			.when('/landing', {
-				templateUrl : 'partials/landing.jsp',
+				templateUrl : 'templates/landing.jsp',
 				controller : LandingCtrl
 			})
 			.otherwise({
@@ -73,6 +51,23 @@ app.directive('integer', function() {
 			});
 		}
 	};
+});
+
+// Prevent the default action when clicking on certain anchor tags.
+app.directive('a', function() {
+    return {
+        restrict: 'E',
+        link: function(scope, elem, attrs) {
+            if(attrs.ngClick || attrs.href === '' || attrs.href === '#'){
+                elem.on('click', function(e){
+                    e.preventDefault();
+                    if(attrs.ngClick){
+                        scope.$eval(attrs.ngClick);
+                    }
+                });
+            }
+        }
+   };
 });
 
 function ifnull(obj1, obj2) {

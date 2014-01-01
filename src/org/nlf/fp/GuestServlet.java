@@ -19,13 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This servlet is intended to handle three types of requests:
+ * This servlet is intended to handle these types of requests:
  * <ul>
  * <li>HTTP POST requests to create new guests.
  * <li>HTTP PUT requests to update existing guests.
@@ -47,7 +46,7 @@ public class GuestServlet extends HttpServlet {
     private void dispatchGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         if (req.getParameter("guestId") != null) {
             getSingleGuest(req, resp);
-        } else if (req.getParameter("firstName") != null && req.getParameter("lastName") != null) {
+        } else if (req.getParameter("lastName") != null) {
             getGuestsFromSearch(req, resp);
         } else if (req.getParameterMap().isEmpty()) {
             getAllGuests(req, resp);
@@ -76,7 +75,6 @@ public class GuestServlet extends HttpServlet {
 
             //@formatter:off
             final String json = mapper
-                    .writerWithView(Guest.Views.ForOrderScreen.class)
                     .writeValueAsString(guests);
             //@formatter:on
             resp.getWriter().println(json);
@@ -87,31 +85,23 @@ public class GuestServlet extends HttpServlet {
     }
 
     private void getGuestsFromSearch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        final String firstName = req.getParameter("firstName");
+        // TODO getting an error here, look at later
         final String lastName = req.getParameter("lastName");
         final PersistenceManager pm = PMF.get().getPersistenceManager();
         final Query q = pm.newQuery(Guest.class);
         try {
-            q.setFilter("firstName.startsWith(givenFirstName)");
-            q.setOrdering("firstName asc, lastName asc");
-            q.declareParameters("String givenFirstName");
+            q.setFilter("lastName.startsWith(givenLastName)");
+            // q.setOrdering("lastName asc, firstName asc");
+            q.declareParameters("String givenLastName");
 
             @SuppressWarnings("unchecked")
-            final List<Guest> guestsFromSearch = new ArrayList<Guest>((List<Guest>) q.execute(firstName));
-            if (lastName != null) {
-                for (final Iterator<Guest> i = guestsFromSearch.iterator(); i.hasNext();) {
-                    final Guest guest = i.next();
-                    if (!guest.getLastName().startsWith(lastName)) {
-                        i.remove();
-                    }
-                }
-            }
+            final List<Guest> guestsFromSearch = new ArrayList<Guest>((List<Guest>) q.execute(lastName));
             final ObjectMapper mapper = new ObjectMapper();
             mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, false);
 
             //@formatter:off
             final String json = mapper
-                    .writerWithView(Guest.Views.ForOrderScreen.class)
+                    //.writerWithView(Guest.Views.ForOrderScreen.class)
                     .writeValueAsString(guestsFromSearch);
             //@formatter:on
             resp.getWriter().println(json);
@@ -136,7 +126,7 @@ public class GuestServlet extends HttpServlet {
         try {
             guest.setKey(keyRange.getStart());
             pm.makePersistent(guest);
-            resp.getWriter().println("Access new guest with id: " + guest.getKey().getId());
+            resp.getWriter().println(guest.getKey().getId());
         } finally {
             pm.close();
         }
