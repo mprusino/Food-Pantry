@@ -56,7 +56,10 @@
                 </h6>
                 <address>
                     <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}} {{loadedGuest.id}}</strong><br>
-                    {{loadedGuest.address}} <br> {{loadedGuest.zipCode}}
+                    {{loadedGuest.address}} <br>
+                    <span ng-repeat="z in zipCodes | filter:loadedGuest.zipCode">
+                        {{z.city}}, {{z.state}} {{z.zipCode}}
+                    </span>
                 </address>
             </article>
             <div class="span6">
