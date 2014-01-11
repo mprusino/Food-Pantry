@@ -70,3 +70,7 @@ form[name='guestForm'] {
 .spacer {
     margin-top: 40px;
 }
+
+#guestSearchResults li a i {
+    float: right;
+}

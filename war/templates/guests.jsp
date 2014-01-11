@@ -40,7 +40,7 @@
                 ng-repeat="guest in guestsFromSearch"
                 id="guestFromSearch{{guest.id}}"><a
                 href="#"
-                ng-click="loadGuest({{guest}})">{{guest.firstName}} {{guest.lastName}}</a></li>
+                ng-click="loadGuest({{guest}})">{{guest.firstName}} {{guest.lastName}} <i class="icon-chevron-right icon-white"></i></a></li>
         </ul>
     </div>
     <div

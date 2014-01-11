@@ -14,6 +14,11 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 	}
 	
 	$scope.loadGuest = function(guest) {
+		// Remove the active class on all guest search results.
+		$("#guestSearchResults li").removeClass("active");
+		// But add it back for the selected guest.
+		$("#guestFromSearch" + guest.id).addClass("active");
+		
 		$scope.loadedGuest = guest;
 		
 		//alert('loading guest with id ' + $scope.loadedGuest.id);
