@@ -139,6 +139,27 @@ public class GuestServlet extends HttpServlet {
 
     @Override
     public void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+        final Long id = Long.valueOf(req.getParameter("guestId"));
+        final String json = IOUtils.toString(req.getInputStream());
+        logger.log(Level.INFO, "Received this JSON:\n" + json + "\nStoring to datastore.");
 
+        final Guest guest = JsonMapper.get().readValue(json, Guest.class);
+        final PersistenceManager pm = PMF.get().getPersistenceManager();
+        try {
+            final Guest existingGuest = pm.getObjectById(Guest.class, id);
+            existingGuest.setFirstName(guest.getFirstName());
+            existingGuest.setLastName(guest.getLastName());
+            existingGuest.setEthnicity(guest.getEthnicity());
+            existingGuest.setLang(guest.getLang());
+            existingGuest.setAddress(guest.getAddress());
+            existingGuest.setZipCode(guest.getZipCode());
+            existingGuest.setSeniors(guest.getSeniors());
+            existingGuest.setAdults(guest.getAdults());
+            existingGuest.setChildren(guest.getChildren());
+            existingGuest.setPhone(guest.getPhone());
+            resp.getWriter().print(existingGuest.getKey().getId());
+        } finally {
+            pm.close();
+        }
     }
 }

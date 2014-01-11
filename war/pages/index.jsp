@@ -25,8 +25,6 @@
 <script src="js/controllers/documents.js"></script>
 <script src="js/controllers/landing.js"></script>
 
-<script src="js/controllers/order.js"></script>
-<script src="js/controllers/registration.js"></script>
 <script src="js/controllers/reporting.js"></script>
 <script src="js/controllers/schedule.js"></script>
 <script src="js/controllers/volunteer.js"></script>

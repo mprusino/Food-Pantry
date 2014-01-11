@@ -1,9 +1,9 @@
 'use strict';
 
 function OrderCtrl($scope, $http) {
-	$http.get('/zipCode').success(function(data) {
-		$scope.zipCodes = data;
-	});
+//	$http.get('/zipCode').success(function(data) {
+//		$scope.zipCodes = data;
+//	});
 	$http.get('/guest').success(function(data) {
 		$scope.guests = data;
 		angular.forEach($scope.guests, function(value, key) {

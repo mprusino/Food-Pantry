@@ -1,19 +1,19 @@
 <div
-    id="newGuestModal"
+    id="editGuestModal"
     class="modal hide fade"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="newGuestModalLabel"
+    aria-labelledby="editGuestModalLabel"
     aria-hidden="true"
-    ng-controller="NewGuestCtrl">
-    <form name="newGuestForm">
+    ng-controller="EditGuestCtrl">
+    <form name="editGuestForm">
         <div class="modal-header">
             <button
                 type="button"
                 class="close"
                 data-dismiss="modal"
                 aria-hidden="true">&times;</button>
-            <h3 id="myModalLabel">New Guest</h3>
+            <h3 id="myModalLabel">Edit {{editGuest.firstName}} {{editGuest.lastName}}</h3>
         </div>
         <div class="modal-body">
             <h5>Guest Information</h5>
@@ -25,8 +25,7 @@
                     type="text"
                     class="input-medium"
                     name="firstName"
-                    ng-model="guest.firstName"
-                    required />
+                    ng-model="editGuest.firstName" />
             </div>
             <div class="input-prepend">
                 <label
@@ -36,8 +35,7 @@
                     type="text"
                     class="input-medium"
                     name="lastName"
-                    ng-model="guest.lastName"
-                    required />
+                    ng-model="editGuest.lastName" />
             </div>
             <div class="input-prepend">
                 <label
@@ -47,20 +45,18 @@
                     type="text"
                     class="input-medium"
                     name="address"
-                    ng-model="guest.address"
-                    required />
+                    ng-model="editGuest.address" />
             </div>
             <div class="input-prepend">
                 <label
-                    for="zipCode"
+                    for="editGuestZipCode"
                     class="add-on em5">Zip Code</label>
                 <select
                     class="px150"
-                    id="newGuestZipCode"
-                    name="newGuestZipCode"
-                    ng-model="guest.zipCode"
-                    ng-options="z.zipCode as (z.city + ', ' + z.state + ' ' + z.zipCode) for z in zipCodes"
-                    required>
+                    id="editGuestZipCode"
+                    name="editGuestZipCode"
+                    ng-model="editGuest.zipCode"
+                    ng-options="z.zipCode as (z.city + ', ' + z.state + ' ' + z.zipCode) for z in zipCodes">
                 </select>
             </div>
             <div class="input-prepend">
@@ -71,8 +67,7 @@
                     type="text"
                     class="input-medium"
                     name="phone"
-                    ng-model="guest.phone"
-                    required />
+                    ng-model="editGuest.phone" />
             </div>
             <h5>Family Information</h5>
             <div>
@@ -87,9 +82,8 @@
                         min="0"
                         max="20"
                         name="adults"
-                        ng-model="guest.adults"
-                        class="input-mini"
-                        required />
+                        ng-model="editGuest.adults"
+                        class="input-mini" />
                 </div>
                 <div class="input-prepend">
                     <label
@@ -102,9 +96,8 @@
                         min="0"
                         max="20"
                         name="seniors"
-                        ng-model="guest.seniors"
-                        class="input-mini"
-                        required />
+                        ng-model="editGuest.seniors"
+                        class="input-mini" />
                 </div>
                 <div class="input-prepend">
                     <label
@@ -117,10 +110,9 @@
                         min="0"
                         max="20"
                         name="children"
-                        ng-model="guest.children"
+                        ng-model="editGuest.children"
                         ng-changed="guestFormChanged()"
-                        class="input-mini"
-                        required />
+                        class="input-mini" />
                 </div>
             </div>
             <h5>Ethnicity</h5>
@@ -128,27 +120,27 @@
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="editGuest.ethnicity"
                     btn-radio="'A'">Asian</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="editGuest.ethnicity"
                     btn-radio="'B'">Black</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="editGuest.ethnicity"
                     btn-radio="'L'">Latino</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="editGuest.ethnicity"
                     btn-radio="'W'">White</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="editGuest.ethnicity"
                     btn-radio="'O'">Other</button>
             </div>
             <h5>Preferred Language</h5>
@@ -156,30 +148,29 @@
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="editGuest.lang"
                     btn-radio="'E'">English</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="editGuest.lang"
                     btn-radio="'C'">Chinese</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="editGuest.lang"
                     btn-radio="'S'">Spanish</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="editGuest.lang"
                     btn-radio="'O'">Other</button>
             </div>
         </div>
         <div class="modal-footer">
             <button
                 class="btn btn-primary"
-                ng-disabled="newGuestForm.$invalid||(!guest.ethnicity)||(!guest.lang)"
-                ng-click="saveNewGuest()">
+                ng-click="saveEditGuest()">
                 Save <i class="icon-chevron-right icon-white"></i>
             </button>
         </div>

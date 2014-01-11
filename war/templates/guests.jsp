@@ -25,8 +25,9 @@
     </div>
 </div>
 
-<%--New Guest Modal Dialog --%>
+<%--New & Edit Guest Modal Dialog Windows --%>
 <jsp:include page="../partials/newGuest.jsp" />
+<jsp:include page="../partials/editGuest.jsp" />
 
 <div
     class="row-fluid"
@@ -35,7 +36,9 @@
         <ul
             id="guestSearchResults"
             class="nav nav-pills nav-stacked">
-            <li ng-repeat="guest in guestsFromSearch" id="guestFromSearch{{guest.id}}"><a
+            <li
+                ng-repeat="guest in guestsFromSearch"
+                id="guestFromSearch{{guest.id}}"><a
                 href="#"
                 ng-click="loadGuest({{guest}})">{{guest.firstName}} {{guest.lastName}}</a></li>
         </ul>
@@ -52,8 +55,8 @@
                     <i class="icon-home"></i> Address
                 </h6>
                 <address>
-                    <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}} {{loadedGuest.id}}</strong><br> {{loadedGuest.address}}
-                    <br> {{loadedGuest.zipCode}}
+                    <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}} {{loadedGuest.id}}</strong><br>
+                    {{loadedGuest.address}} <br> {{loadedGuest.zipCode}}
                 </address>
             </article>
             <div class="span6">
@@ -65,7 +68,13 @@
             </div>
         </div>
         <div class="row-fluid">
-            <button class="btn btn-small">
+            <button
+                type="button"
+                class="btn btn-small"
+                data-toggle="modal"
+                data-backdrop="static"
+                data-target="#editGuestModal"
+                ng-click="editGuestClicked();">
                 <i class="icon-user"></i> Edit Guest Info
             </button>
         </div>
