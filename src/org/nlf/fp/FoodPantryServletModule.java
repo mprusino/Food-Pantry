@@ -24,5 +24,8 @@ public class FoodPantryServletModule extends ServletModule {
 
         serve("/volunteer*").with(VolunteerServlet.class);
         filter("/volunteer*").through(AuthenticationFilter.class);
+
+        serve("/report*").with(ReportServlet.class);
+        filter("/report*").through(AuthenticationFilter.class);
     }
 }
