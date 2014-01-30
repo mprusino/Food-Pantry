@@ -8,7 +8,7 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 	$scope.guestSearch = function() {
 		//alert('search clicked!');
 		var url = '/guest';
-		if ($scope.lastName != "") {
+		if ($scope.lastName != undefined) {
 			url += '?lastName=' + $scope.lastName;
 		}
 		$http.get(url).success(function(data) {
