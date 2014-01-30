@@ -6,7 +6,7 @@
             id="guestSearch"
             placeholder="Search for a guest by last name..."
             class="input-xlarge"
-            ng-model="query"
+            ng-model="lastName"
             type="text" />
         <button
             class="btn"
@@ -37,7 +37,7 @@
             id="guestSearchResults"
             class="nav nav-pills nav-stacked">
             <li
-                ng-repeat="guest in guestsFromSearch"
+                ng-repeat="guest in guestsFromSearch | filter:lastName:strict"
                 id="guestFromSearch{{guest.id}}"><a
                 href="#"
                 ng-click="loadGuest({{guest}})">{{guest.firstName}} {{guest.lastName}} <i class="icon-chevron-right icon-white"></i></a></li>

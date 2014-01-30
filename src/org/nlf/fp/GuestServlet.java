@@ -46,7 +46,7 @@ public class GuestServlet extends HttpServlet {
     private void dispatchGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         if (req.getParameter("guestId") != null) {
             getSingleGuest(req, resp);
-        } else if (req.getParameter("lastName") != null) {
+        } else if (req.getParameter("lastName") != null && !req.getParameter("lastName").isEmpty()) {
             getGuestsFromSearch(req, resp);
         } else if (req.getParameterMap().isEmpty()) {
             getAllGuests(req, resp);
@@ -85,7 +85,7 @@ public class GuestServlet extends HttpServlet {
     }
 
     private void getGuestsFromSearch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-        // TODO getting an error here, look at later
+        // TODO Getting an error here, look at later. (Seems to be working now!)
         final String lastName = req.getParameter("lastName");
         final PersistenceManager pm = PMF.get().getPersistenceManager();
         final Query q = pm.newQuery(Guest.class);
