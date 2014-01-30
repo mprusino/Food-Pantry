@@ -13,6 +13,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -63,6 +64,16 @@ public class ClothingOrder {
     @JsonView(Views.ForOrderScreen.class)
     public String getOrderDateAsString() {
         return Utilities.formatAsFullDate(orderDate);
+    }
+
+    @JsonView(Views.ForOrderScreen.class)
+    public boolean isToday() {
+        final Calendar today = Calendar.getInstance();
+        final Calendar orderCalendar = Calendar.getInstance();
+        orderCalendar.setTime(orderDate);
+        return orderCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR)
+                && orderCalendar.get(Calendar.MONTH) == today.get(Calendar.MONTH)
+                && orderCalendar.get(Calendar.DATE) == today.get(Calendar.DATE);
     }
 
     public void setOrderDate(final Date orderDate) {

@@ -109,7 +109,8 @@
                 <button
                     type="button"
                     class="btn btn-small"
-                    ng-click="createFoodOrder()">
+                    ng-click="createFoodOrder()"
+                    ng-show="allowFoodOrder">
                     <i class="icon-shopping-cart"></i> Create Today's Food Order
                 </button>
             </div>
@@ -117,7 +118,8 @@
                 <button
                     type="button"
                     class="btn btn-small"
-                    ng-click="createClothingOrder()">
+                    ng-click="createClothingOrder()"
+                    ng-show="allowClothingOrder">
                     <i class="icon-gift"></i> Create Today's Clothing Order
                 </button>
             </div>

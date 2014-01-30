@@ -23,12 +23,26 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 		
 		//alert('loading guest with id ' + $scope.loadedGuest.id);
 		$http.get('/food?guestId=' + $scope.loadedGuest.id).success(function(data) {
-			//console.log(data);
+			console.log(data);
 			$scope.loadedGuestFoodOrders = data;
+			$scope.allowFoodOrder = true;
+			for (var i = 0; i < data.length; i++) {
+				console.log(data[i]);
+				if (data[i].today == true) {
+					$scope.allowFoodOrder = false;
+				}
+			}
 		});
 		$http.get('/clothing?guestId=' + $scope.loadedGuest.id).success(function(data) {
 			//console.log(data);
 			$scope.loadedGuestClothingOrders = data;
+			$scope.allowClothingOrder = true;
+			for (var i = 0; i < data.length; i++) {
+				console.log(data[i]);
+				if (data[i].today == true) {
+					$scope.allowClothingOrder = false;
+				}
+			}
 		});
 	};
 	
