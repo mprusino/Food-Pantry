@@ -132,7 +132,7 @@ function NewGuestCtrl($scope, $route, $routeParams, $location, $http) {
 	}
 }
 
-function EditGuestCtrl($scope, $route, $routeParams, $location, $http) {
+function EditGuestCtrl($scope, $route, $routeParams, $location, $http, $filter) {
 	$scope.saveEditGuest = function() {
 		//alert('save clicked!');
 		//console.debug($scope.guest);
@@ -148,6 +148,10 @@ function EditGuestCtrl($scope, $route, $routeParams, $location, $http) {
 				angular.forEach($scope.editGuest, function(value, key) {
 					$scope.loadedGuest[key] = value;
 				});
+				
+				$("#guestSearchResults li[class~='active'] a").text($scope.editGuest.firstName + " " + $scope.editGuest.lastName);
+				//var editGuestAsJson = $filter('json')($scope.editGuest);
+				//$("#guestSearchResults li[class~='active'] a").attr("ng-click", "");
 			}
 		});
 	}
