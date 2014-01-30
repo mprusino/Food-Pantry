@@ -19,7 +19,7 @@ public class Utilities {
         if (date == null) {
             return null;
         } else {
-            return new SimpleDateFormat("EEE MMMM d yyyy").format(date);
+            return new SimpleDateFormat("EEE MMM d yyyy").format(date);
         }
     }
 

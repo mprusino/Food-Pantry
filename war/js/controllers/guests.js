@@ -20,7 +20,11 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 		$("#guestFromSearch" + guest.id).addClass("active");
 		
 		$scope.loadedGuest = guest;
-		
+		$scope.reloadFoodOrders();
+		$scope.reloadClothingOrders();
+	};
+	
+	$scope.reloadFoodOrders = function() {
 		//alert('loading guest with id ' + $scope.loadedGuest.id);
 		$http.get('/food?guestId=' + $scope.loadedGuest.id).success(function(data) {
 			console.log(data);
@@ -33,6 +37,9 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 				}
 			}
 		});
+	};
+	
+	$scope.reloadClothingOrders = function() {
 		$http.get('/clothing?guestId=' + $scope.loadedGuest.id).success(function(data) {
 			//console.log(data);
 			$scope.loadedGuestClothingOrders = data;
@@ -49,14 +56,26 @@ function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) 
 	$scope.createFoodOrder = function() {
 		//alert('create food order clicked!' + $scope.loadedGuest.id);
 		$http.post('/food', $scope.loadedGuest.id).success(function(data) {
-			//console.log(data);
+			var newOrder = {};
+			newOrder["orderDateAsString"] = new Date().toDateString();
+			newOrder["today"] = true;
+			$scope.loadedGuestFoodOrders.splice(0, 0, newOrder);
+			$scope.allowFoodOrder = false;
+			$("#noHistoryFoodOrder").hide();
 		});
 	}
 	
 	$scope.createClothingOrder = function() {
 		//alert('create clothing order clicked! ' + $scope.loadedGuest.id);
 		$http.post('/clothing', $scope.loadedGuest.id).success(function(data) {
-			//console.log(data);
+			//$scope.allowClothingOrder = false;
+			//console.log($scope.loadedGuestClothingOrders);
+			var newOrder = {};
+			newOrder["orderDateAsString"] = new Date().toDateString();
+			newOrder["today"] = true;
+			$scope.loadedGuestClothingOrders.splice(0, 0, newOrder);
+			$scope.allowClothingOrder = false;
+			$("#noHistoryClothingOrder").hide();
 		});
 	}
 	

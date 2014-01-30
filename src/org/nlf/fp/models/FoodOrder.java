@@ -80,7 +80,9 @@ public class FoodOrder {
     }
 
     public void setOrderDateToToday() {
-        this.orderDate = Utilities.toUtc(new Date());
+        final Date today = new Date();
+        // today.setTime(today.getTime() - 1000 * 60 * 60 * 24);
+        this.orderDate = Utilities.toUtc(today);
     }
 
     public short getSeniors() {

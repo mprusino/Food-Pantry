@@ -91,7 +91,7 @@
                 </h6>
                 <ul class="unstyled">
                     <li ng-repeat="order in loadedGuestFoodOrders | limitTo:3">{{order.orderDateAsString}}</li>
-                    <li ng-hide="loadedGuestFoodOrders">(No history)</li>
+                    <li ng-hide="loadedGuestFoodOrders" id="noHistoryFoodOrder">(No history)</li>
                 </ul>
             </div>
             <div class="span6">
@@ -100,7 +100,7 @@
                 </h6>
                 <ul class="unstyled">
                     <li ng-repeat="order in loadedGuestClothingOrders | limitTo:3">{{order.orderDateAsString}}</li>
-                    <li ng-hide="loadedGuestClothingOrders">(No history)</li>
+                    <li ng-hide="loadedGuestClothingOrders" id="noHistoryClothingOrder">(No history)</li>
                 </ul>
             </div>
         </div>
