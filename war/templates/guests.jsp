@@ -55,7 +55,7 @@
                     <i class="icon-home"></i> Address
                 </h6>
                 <address>
-                    <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}} {{loadedGuest.id}}</strong><br>
+                    <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}}</strong><br>
                     {{loadedGuest.address}} <br>
                     <span ng-repeat="z in zipCodes | filter:loadedGuest.zipCode">
                         {{z.city}}, {{z.state}} {{z.zipCode}}
@@ -90,7 +90,7 @@
                     <i class="icon-shopping-cart"></i> Food Order History
                 </h6>
                 <ul class="unstyled">
-                    <li ng-repeat="order in loadedGuestFoodOrders">{{order.orderDateAsString}}</li>
+                    <li ng-repeat="order in loadedGuestFoodOrders | limitTo:3">{{order.orderDateAsString}}</li>
                     <li ng-hide="loadedGuestFoodOrders">(No history)</li>
                 </ul>
             </div>
@@ -99,7 +99,7 @@
                     <i class="icon-gift"></i> Clothing Order History
                 </h6>
                 <ul class="unstyled">
-                    <li ng-repeat="order in loadedGuestClothingOrders">{{order.orderDateAsString}}</li>
+                    <li ng-repeat="order in loadedGuestClothingOrders | limitTo:3">{{order.orderDateAsString}}</li>
                     <li ng-hide="loadedGuestClothingOrders">(No history)</li>
                 </ul>
             </div>

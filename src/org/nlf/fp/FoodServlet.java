@@ -1,6 +1,7 @@
 package org.nlf.fp;
 
 import org.nlf.fp.models.FoodOrder;
+import org.nlf.fp.models.Guest;
 
 import org.apache.commons.io.IOUtils;
 
@@ -79,6 +80,10 @@ public class FoodServlet extends HttpServlet {
         foodOrder.setOrderDateToToday();
 
         final PersistenceManager pm = PMF.get().getPersistenceManager();
+        final Guest guest = pm.getObjectById(Guest.class, guestId);
+        foodOrder.setAdults(guest.getAdults());
+        foodOrder.setChildren(guest.getChildren());
+        foodOrder.setSeniors(guest.getSeniors());
         final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         final KeyRange keyRange = datastore.allocateIds(FoodOrder.class.getSimpleName(), 1L);
         try {

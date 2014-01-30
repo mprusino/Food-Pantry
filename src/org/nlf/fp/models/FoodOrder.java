@@ -27,6 +27,12 @@ public class FoodOrder {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy", timezone = "UTC")
     @Persistent
     private Date orderDate;
+    @Persistent
+    private short seniors;
+    @Persistent
+    private short adults;
+    @Persistent
+    private short children;
 
     public class Views {
         public class ForOrderScreen {
@@ -65,4 +71,29 @@ public class FoodOrder {
     public void setOrderDateToToday() {
         this.orderDate = Utilities.toUtc(new Date());
     }
+
+    public short getSeniors() {
+        return seniors;
+    }
+
+    public void setSeniors(final short seniors) {
+        this.seniors = seniors;
+    }
+
+    public short getAdults() {
+        return adults;
+    }
+
+    public void setAdults(final short adults) {
+        this.adults = adults;
+    }
+
+    public short getChildren() {
+        return children;
+    }
+
+    public void setChildren(final short children) {
+        this.children = children;
+    }
+
 }
