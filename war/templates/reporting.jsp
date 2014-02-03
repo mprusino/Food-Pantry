@@ -31,5 +31,13 @@
             <td>{{row.adults}}</td>
             <td>{{row.seniors}}</td>
         </tr>
+        <tr>
+            <th>Total</th>
+            <th>{{total.totalOrder}}</th>
+            <th>{{total.totalFed}}</th>
+            <th>{{total.children}}</th>
+            <th>{{total.adults}}</th>
+            <th>{{total.seniors}}</th>
+        </tr>
     </table>
 </div>
