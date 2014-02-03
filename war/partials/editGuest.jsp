@@ -5,7 +5,7 @@
     role="dialog"
     aria-labelledby="editGuestModalLabel"
     aria-hidden="true"
-    ng-controller="EditGuestCtrl">
+    ng-controller="GuestsCtrl">
     <form name="editGuestForm">
         <div class="modal-header">
             <button

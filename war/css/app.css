@@ -71,6 +71,12 @@ form[name='guestForm'] {
     margin-top: 40px;
 }
 
+#guestSearchResults {
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 #guestSearchResults li a i {
     float: right;
 }

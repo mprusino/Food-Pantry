@@ -19,7 +19,7 @@ public class Utilities {
         if (date == null) {
             return null;
         } else {
-            return new SimpleDateFormat("EEE MMM d yyyy").format(date);
+            return new SimpleDateFormat("EEE MMM dd yyyy").format(date);
         }
     }
 
@@ -33,6 +33,20 @@ public class Utilities {
         } else {
             final Calendar calendar = toCalendar(date);
             calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return calendar.getTime();
+        }
+    }
+
+    public static Date truncateTime(final Date date) {
+        if (date == null) {
+            return null;
+        } else {
+            final Calendar calendar = toCalendar(date);
+            calendar.setTime(date);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
             return calendar.getTime();
         }
     }

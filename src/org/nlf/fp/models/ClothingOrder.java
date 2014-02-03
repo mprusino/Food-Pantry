@@ -12,12 +12,14 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.Unique;
 
 import java.util.Calendar;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @PersistenceCapable
+@Unique(name = "OneClothingOrderPerDay", members = { "guestId", "orderDate" })
 public class ClothingOrder {
     @JsonIgnore
     @PrimaryKey
@@ -77,11 +79,11 @@ public class ClothingOrder {
     }
 
     public void setOrderDate(final Date orderDate) {
-        this.orderDate = Utilities.toUtc(orderDate);
+        this.orderDate = Utilities.toUtc(Utilities.truncateTime(orderDate));
     }
 
     public void setOrderDateToToday() {
-        this.orderDate = Utilities.toUtc(new Date());
+        this.orderDate = Utilities.toUtc(Utilities.truncateTime(new Date()));
     }
 
     public short getSeniors() {

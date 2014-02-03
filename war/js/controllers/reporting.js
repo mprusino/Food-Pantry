@@ -3,7 +3,7 @@
 function ReportingCtrl($scope, $http) {
 	$scope.runReport = function() {
 		$http.get('/report?year=' + $scope.year).success(function(data) {
-			console.log(data);
+			//console.log(data);
 			$scope.reportYear = $scope.year;
 			$scope.reportData = data;
 			$scope.total = {};

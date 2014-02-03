@@ -1,160 +1,163 @@
 'use strict';
 
-function GuestsCtrl($scope, $rootScope, $route, $routeParams, $location, $http) {
-	$scope.query = "";
-	$scope.loadedGuestFoodOrders = [];
-	$scope.loadedGuestClothingOrders = [];
+function GuestsCtrl($scope, $rootScope, $http, $cacheFactory, $timeout) {
+	if ($cacheFactory.get('guestIndex') == undefined) {
+		// Initialize caches just once.
+		$cacheFactory('guestStore');
+		$cacheFactory('guestIndex');
+		$cacheFactory.get('guestIndex').put("byId", {});
+	}
 	
-	$scope.guestSearch = function() {
-		//alert('search clicked!');
-		var url = '/guest';
-		if ($scope.lastName != undefined && $scope.lastName != "") {
-			url += '?lastName=' + $scope.lastName;
-		}
-		$http.get(url).success(function(data) {
-			//console.log(data);
-			$scope.guestsFromSearch = data;
+	var guestStore = $cacheFactory.get('guestStore');
+	var guestIndex = $cacheFactory.get('guestIndex').get("byId");
+	
+	// Stores an array of guest objects into the guestStore.
+	$rootScope.storeGuests = function(guests) {
+		angular.forEach(guests, function(guest) {
+			$rootScope.storeGuest(guest);
 		});
 	}
 	
-	$scope.loadGuest = function(guest) {
-		// Remove the active class on all guest search results.
-		$("#guestSearchResults li").removeClass("active");
-		// But add it back for the selected guest.
-		$("#guestFromSearch" + guest.id).addClass("active");
+	// Stores a single guest object into the guestStore.
+	$rootScope.storeGuest = function(guest) {
+		var guestIdAsString = "" + guest.id;
+		guestStore.put(guestIdAsString, guest);
+		guestIndex[guestIdAsString] = true;
+	}
+	
+	// Loads all guests from the guestStore for display in the search results section.
+	$rootScope.loadGuests = function() {
+		$rootScope.guestsFromSearch = [];
 		
-		$scope.loadedGuest = guest;
-		$scope.reloadFoodOrders();
-		$scope.reloadClothingOrders();
+		angular.forEach(guestIndex, function (value, key) {
+			var guestIdAsString = key;
+			var guest = guestStore.get(guestIdAsString);
+			$rootScope.guestsFromSearch.push(guest);
+		});
+	}
+	
+	// Load a single guest from the guestStore for display in the read only guest information section.
+	$rootScope.loadGuest = function(guestId) {
+		$("#guestSearchResults li").removeClass("active"); // Remove the active class on all guest search results.
+		$("#guestFromSearch" + guestId).addClass("active"); // But add it back for the selected guest.
+		
+		var guestIdAsString = "" + guestId;
+		$rootScope.readOnlyGuest = angular.copy(guestStore.get(guestId));
+		$rootScope.reloadFoodOrders();
+		$rootScope.reloadClothingOrders();
 	};
 	
-	$scope.reloadFoodOrders = function() {
-		//alert('loading guest with id ' + $scope.loadedGuest.id);
-		$http.get('/food?guestId=' + $scope.loadedGuest.id).success(function(data) {
-			console.log(data);
-			$scope.loadedGuestFoodOrders = data;
-			$scope.allowFoodOrder = true;
+	// Save a new guest.
+	$rootScope.saveNewGuest = function() {
+		$http.post('/guest', $rootScope.newGuest).success(function(data, status, headers, config) {
+			if (status == 200) { // HTTP Status Code of 200 = success.
+				$("#newGuestModal").modal('hide'); // Hide the popup dialog box.
+				$rootScope.newGuest.id = parseInt(data.trim()); // The new guest now has an id from the server.
+				$rootScope.lastModifiedGuestId = $rootScope.newGuest.id;
+				$rootScope.storeGuest(angular.copy($rootScope.newGuest)); // Store the guest into the guest store.
+				$rootScope.loadGuests(); // Load all guests in the guestStore for display in the search results section.
+				$rootScope.loadGuest($rootScope.newGuest.id); // Load the new guest in the read only guest information section.
+			}
+		});
+	};
+	
+	// Save an existing guest.
+	$rootScope.saveEditGuest = function() {
+		$http.put('/guest?guestId=' + $rootScope.editGuest.id, $rootScope.editGuest).success(function(data, status, headers, config) {
+			if (status == 200) { // HTTP Status Code of 200 = success.
+				$("#editGuestModal").modal('hide'); // Hide the popup dialog box.
+				$rootScope.lastModifiedGuestId = $rootScope.editGuest.id;
+				$rootScope.storeGuest(angular.copy($rootScope.editGuest));
+				$rootScope.readOnlyGuest = angular.copy($rootScope.editGuest);
+				$("#guestSearchResults li[class~='active'] a").text($rootScope.editGuest.firstName + " " + $rootScope.editGuest.lastName);
+			}
+		});
+	}
+	
+	// If the user returns to this page and the cache is already populated then load all guests from the guestStore for
+	// display in the search results section.
+	if (guestStore.info().size > 0) {
+		$rootScope.loadGuests();
+	}
+	
+	// Perform a guest search.
+	$rootScope.guestSearch = function() {
+		// Determine if we need to search by last name.
+		var url = '/guest';
+		if ($rootScope.query != undefined && $rootScope.query != "") {
+			url += '?lastName=' + $rootScope.query;
+		}
+		
+		$http.get(url).success(function(guests) {
+			$rootScope.storeGuests(guests);
+			$rootScope.loadGuests();
+		});
+	}
+	
+	$rootScope.loadedGuestFoodOrders = [];
+	$rootScope.loadedGuestClothingOrders = [];
+	
+	$rootScope.reloadFoodOrders = function() {
+		$http.get('/food?guestId=' + $rootScope.readOnlyGuest.id).success(function(data) {
+			$rootScope.loadedGuestFoodOrders = data;
+			$rootScope.allowFoodOrder = true;
 			for (var i = 0; i < data.length; i++) {
-				console.log(data[i]);
 				if (data[i].today == true) {
-					$scope.allowFoodOrder = false;
+					$rootScope.allowFoodOrder = false;
 				}
 			}
 		});
 	};
 	
-	$scope.reloadClothingOrders = function() {
-		$http.get('/clothing?guestId=' + $scope.loadedGuest.id).success(function(data) {
+	$rootScope.reloadClothingOrders = function() {
+		$http.get('/clothing?guestId=' + $rootScope.readOnlyGuest.id).success(function(data) {
 			//console.log(data);
-			$scope.loadedGuestClothingOrders = data;
-			$scope.allowClothingOrder = true;
+			$rootScope.loadedGuestClothingOrders = data;
+			$rootScope.allowClothingOrder = true;
 			for (var i = 0; i < data.length; i++) {
-				console.log(data[i]);
 				if (data[i].today == true) {
-					$scope.allowClothingOrder = false;
+					$rootScope.allowClothingOrder = false;
 				}
 			}
 		});
 	};
 	
-	$scope.createFoodOrder = function() {
-		//alert('create food order clicked!' + $scope.loadedGuest.id);
-		$http.post('/food', $scope.loadedGuest.id).success(function(data) {
+	$rootScope.createFoodOrder = function() {
+		$("#noHistoryFoodOrder").hide();
+		$http.post('/food', $rootScope.readOnlyGuest.id).success(function(data) {
 			var newOrder = {};
 			newOrder["orderDateAsString"] = new Date().toDateString();
 			newOrder["today"] = true;
-			$scope.loadedGuestFoodOrders.splice(0, 0, newOrder);
-			$scope.allowFoodOrder = false;
-			$("#noHistoryFoodOrder").hide();
+			$rootScope.loadedGuestFoodOrders.splice(0, 0, newOrder);
+			$rootScope.allowFoodOrder = false;
 		});
 	}
 	
-	$scope.createClothingOrder = function() {
-		//alert('create clothing order clicked! ' + $scope.loadedGuest.id);
-		$http.post('/clothing', $scope.loadedGuest.id).success(function(data) {
+	$rootScope.createClothingOrder = function() {
+		$("#noHistoryClothingOrder").hide();
+		$http.post('/clothing', $rootScope.readOnlyGuest.id).success(function(data) {
 			//$scope.allowClothingOrder = false;
 			//console.log($scope.loadedGuestClothingOrders);
 			var newOrder = {};
 			newOrder["orderDateAsString"] = new Date().toDateString();
 			newOrder["today"] = true;
-			$scope.loadedGuestClothingOrders.splice(0, 0, newOrder);
-			$scope.allowClothingOrder = false;
-			$("#noHistoryClothingOrder").hide();
+			$rootScope.loadedGuestClothingOrders.splice(0, 0, newOrder);
+			$rootScope.allowClothingOrder = false;
 		});
 	}
 	
-	$scope.editGuestClicked = function() {
-		$scope.editGuest = emptyGuest();
-		angular.forEach($scope.loadedGuest, function(value, key) {
-			$scope.editGuest[key] = value;
+	$rootScope.editGuestClicked = function() {
+		$rootScope.editGuest = emptyGuest();
+		angular.forEach($rootScope.readOnlyGuest, function(value, key) {
+			$rootScope.editGuest[key] = value;
 		});
 	}
 	
 	$http.get('/zipCode').success(function(data) {
 		$rootScope.zipCodes = data;
 	});
-}
-
-function NewGuestCtrl($scope, $route, $routeParams, $location, $http) {
-	$scope.guest = dummy();
 	
-	$scope.saveNewGuest = function() {
-		//alert('save clicked!');
-		//console.debug($scope.guest);
-		
-		$http.post('/guest', $scope.guest).success(function(data, status, headers, config) {
-			//console.log(status);
-			if (status == 200) { // success
-				data = data.trim();
-				$scope.guest.id = data;
-				
-				// hide the dialog
-				$("#newGuestModal").modal('hide');
-				
-				// copy over each field
-				// too bad this doesn't work: $scope.loadedGuest = $scope.guest
-				angular.forEach($scope.guest, function(value, key) {
-					$scope.loadedGuest[key] = value;
-				});
-				
-				if ($scope.guestsFromSearch != null) {
-					// clear out the list of searched guests
-					// too bad this doesn't work: $scope.guestsFromSearch = []
-					for (var i = $scope.guestsFromSearch.length; i--; i > 0) {
-						$scope.guestsFromSearch.pop();
-					}
-					
-					// append the saved guest to the list of searched guests
-					$scope.guestsFromSearch.push($scope.guest);
-				}
-			}
-		});
-	}
-}
-
-function EditGuestCtrl($scope, $route, $routeParams, $location, $http, $filter) {
-	$scope.saveEditGuest = function() {
-		//alert('save clicked!');
-		//console.debug($scope.guest);
-		
-		$http.put('/guest?guestId=' + $scope.editGuest.id, $scope.editGuest).success(function(data, status, headers, config) {
-			//console.log(status);
-			if (status == 200) { // success
-				// hide the dialog
-				$("#editGuestModal").modal('hide');
-				
-				// copy over each field
-				// too bad this doesn't work: $scope.loadedGuest = $scope.guest
-				angular.forEach($scope.editGuest, function(value, key) {
-					$scope.loadedGuest[key] = value;
-				});
-				
-				$("#guestSearchResults li[class~='active'] a").text($scope.editGuest.firstName + " " + $scope.editGuest.lastName);
-				//var editGuestAsJson = $filter('json')($scope.editGuest);
-				//$("#guestSearchResults li[class~='active'] a").attr("ng-click", "");
-			}
-		});
-	}
+	$rootScope.newGuest = dummy();
 }
 
 function emptyGuest() {

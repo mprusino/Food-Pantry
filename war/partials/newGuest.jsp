@@ -5,7 +5,7 @@
     role="dialog"
     aria-labelledby="newGuestModalLabel"
     aria-hidden="true"
-    ng-controller="NewGuestCtrl">
+    ng-controller="GuestsCtrl">
     <form name="newGuestForm">
         <div class="modal-header">
             <button
@@ -25,7 +25,7 @@
                     type="text"
                     class="input-medium"
                     name="firstName"
-                    ng-model="guest.firstName"
+                    ng-model="newGuest.firstName"
                     required />
             </div>
             <div class="input-prepend">
@@ -36,7 +36,7 @@
                     type="text"
                     class="input-medium"
                     name="lastName"
-                    ng-model="guest.lastName"
+                    ng-model="newGuest.lastName"
                     required />
             </div>
             <div class="input-prepend">
@@ -47,7 +47,7 @@
                     type="text"
                     class="input-medium"
                     name="address"
-                    ng-model="guest.address"
+                    ng-model="newGuest.address"
                     required />
             </div>
             <div class="input-prepend">
@@ -58,7 +58,7 @@
                     class="px150"
                     id="newGuestZipCode"
                     name="newGuestZipCode"
-                    ng-model="guest.zipCode"
+                    ng-model="newGuest.zipCode"
                     ng-options="z.zipCode as (z.city + ', ' + z.state + ' ' + z.zipCode) for z in zipCodes"
                     required>
                 </select>
@@ -71,7 +71,7 @@
                     type="text"
                     class="input-medium"
                     name="phone"
-                    ng-model="guest.phone"
+                    ng-model="newGuest.phone"
                     required />
             </div>
             <h5>Family Information</h5>
@@ -87,7 +87,7 @@
                         min="0"
                         max="20"
                         name="adults"
-                        ng-model="guest.adults"
+                        ng-model="newGuest.adults"
                         class="input-mini"
                         required />
                 </div>
@@ -102,7 +102,7 @@
                         min="0"
                         max="20"
                         name="seniors"
-                        ng-model="guest.seniors"
+                        ng-model="newGuest.seniors"
                         class="input-mini"
                         required />
                 </div>
@@ -117,7 +117,7 @@
                         min="0"
                         max="20"
                         name="children"
-                        ng-model="guest.children"
+                        ng-model="newGuest.children"
                         ng-changed="guestFormChanged()"
                         class="input-mini"
                         required />
@@ -128,27 +128,27 @@
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="newGuest.ethnicity"
                     btn-radio="'A'">Asian</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="newGuest.ethnicity"
                     btn-radio="'B'">Black</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="newGuest.ethnicity"
                     btn-radio="'L'">Latino</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="newGuest.ethnicity"
                     btn-radio="'W'">White</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.ethnicity"
+                    ng-model="newGuest.ethnicity"
                     btn-radio="'O'">Other</button>
             </div>
             <h5>Preferred Language</h5>
@@ -156,29 +156,29 @@
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="newGuest.lang"
                     btn-radio="'E'">English</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="newGuest.lang"
                     btn-radio="'C'">Chinese</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="newGuest.lang"
                     btn-radio="'S'">Spanish</button>
                 <button
                     type="button"
                     class="btn"
-                    ng-model="guest.lang"
+                    ng-model="newGuest.lang"
                     btn-radio="'O'">Other</button>
             </div>
         </div>
         <div class="modal-footer">
             <button
                 class="btn btn-primary"
-                ng-disabled="newGuestForm.$invalid||(!guest.ethnicity)||(!guest.lang)"
+                ng-disabled="newGuestForm.$invalid||(!newGuest.ethnicity)||(!newGuest.lang)"
                 ng-click="saveNewGuest()">
                 Save <i class="icon-chevron-right icon-white"></i>
             </button>

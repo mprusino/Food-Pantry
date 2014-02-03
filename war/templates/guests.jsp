@@ -1,12 +1,13 @@
 <div
-    class="container"
-    id="orderContainer">
+    id="orderContainer"
+    class="container">
     <div class="input-append">
         <input
             id="guestSearch"
             placeholder="Search for a guest by last name..."
             class="input-xlarge"
-            ng-model="lastName"
+            ng-init="query = ''"
+            ng-model="query"
             type="text" />
         <button
             class="btn"
@@ -37,15 +38,15 @@
             id="guestSearchResults"
             class="nav nav-pills nav-stacked">
             <li
-                ng-repeat="guest in guestsFromSearch | filter:lastName:strict"
+                ng-repeat="guest in guestsFromSearch | filter:{lastName: query}"
                 id="guestFromSearch{{guest.id}}"><a
                 href="#"
-                ng-click="loadGuest({{guest}})">{{guest.firstName}} {{guest.lastName}} <i class="icon-chevron-right icon-white"></i></a></li>
+                ng-click="loadGuest({{guest.id}})">{{guest.firstName}} {{guest.lastName}} <i class="icon-chevron-right icon-white"></i></a></li>
         </ul>
     </div>
     <div
         class="span9"
-        ng-show="loadedGuest">
+        ng-show="readOnlyGuest">
         <div class="row-fluid">
             <h4>Guest Information</h4>
         </div>
@@ -55,9 +56,9 @@
                     <i class="icon-home"></i> Address
                 </h6>
                 <address>
-                    <strong>{{loadedGuest.firstName}} {{loadedGuest.lastName}}</strong><br>
-                    {{loadedGuest.address}} <br>
-                    <span ng-repeat="z in zipCodes | filter:loadedGuest.zipCode">
+                    <strong>{{readOnlyGuest.firstName}} {{readOnlyGuest.lastName}}</strong><br>
+                    {{readOnlyGuest.address}} <br>
+                    <span ng-repeat="z in zipCodes | filter:readOnlyGuest.zipCode">
                         {{z.city}}, {{z.state}} {{z.zipCode}}
                     </span>
                 </address>
@@ -66,8 +67,8 @@
                 <h6>
                     <i class="icon-user"></i> Family
                 </h6>
-                {{loadedGuest.adults}} Adults <br> {{loadedGuest.children}} Children <br>
-                {{loadedGuest.seniors}} Seniors
+                {{readOnlyGuest.adults}} Adults <br> {{readOnlyGuest.children}} Children <br>
+                {{readOnlyGuest.seniors}} Seniors
             </div>
         </div>
         <div class="row-fluid">
