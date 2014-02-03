@@ -177,8 +177,8 @@ function dummy() {
 	var guest = {};
 	guest.firstName = "John";
 	guest.lastName = "Smith";
-	guest.address = "25-66 42nd St";
-	guest.zipCode = "11103";
+	guest.address = "123 Sesame St";
+	guest.zipCode = "11102";
 	guest.phone = "212-555-1234";
 	guest.adults = 1;
 	guest.seniors = 0;
