@@ -72,6 +72,8 @@
                     class="input-medium"
                     name="phone"
                     ng-model="newGuest.phone"
+                    ng-pattern="/^\d{3}-\d{3}-\d{4}$/"
+                    placeholder="ex: 123-555-1234"
                     required />
             </div>
             <h5>Family Information</h5>
