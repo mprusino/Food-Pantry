@@ -180,7 +180,7 @@
         <div class="modal-footer">
             <button
                 class="btn btn-primary"
-                ng-disabled="newGuestForm.$invalid||(!newGuest.ethnicity)||(!newGuest.lang)"
+                ng-disabled="newGuestForm.$invalid||(!newGuest.ethnicity)||(!newGuest.lang)||(newGuest.adults==0&&newGuest.seniors==0)"
                 ng-click="saveNewGuest()">
                 Save <i class="icon-chevron-right icon-white"></i>
             </button>
