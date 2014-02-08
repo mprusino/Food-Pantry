@@ -153,6 +153,15 @@ function GuestsCtrl($scope, $rootScope, $http, $cacheFactory, $timeout) {
 		});
 	}
 	
+	$rootScope.areaCode = function(phoneNumber) {
+		var length = phoneNumber.length;
+		if (length > 3) {
+			return phoneNumber.substr(0, 3);
+		} else {
+			return phoneNumber;
+		}
+	};
+	
 	$http.get('/zipCode').success(function(data) {
 		$rootScope.zipCodes = data;
 	});

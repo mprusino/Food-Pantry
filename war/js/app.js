@@ -28,7 +28,33 @@ var app = angular.module('food-pantry', ['ui.bootstrap']).config(
 			.otherwise({
 				redirectTo : '/landing'
 			});
-		} ]);
+		} ]).filter('formattedPhoneNumber', function() {
+			return function(input) {
+				var p = /^\d+$/;
+				
+				if (!p.test(input)) {
+					return "";
+				}
+				
+				var output = "";
+				
+				for (var i = 0; i < input.length; i++) {
+					if (i == 0) {
+						output += "(";
+					} else if (i == 6) {
+						output += "-";
+					}
+					
+					output += input[i];
+					
+					if (i == 2) {
+						output += ") ";
+					} 
+				}
+				
+				return output;
+			}
+		});
 
 // Copied from Angular's custom validation example, the following directive can be added
 // to an element to make sure the value is an integer.
