@@ -9,10 +9,11 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.listener.StoreCallback;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @PersistenceCapable
-public class Guest {
+public class Guest implements StoreCallback {
     @JsonIgnore
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -21,6 +22,8 @@ public class Guest {
     private String firstName;
     @Persistent
     private String lastName;
+    @Persistent
+    private String upperCaseLastName;
     @Persistent
     private String ethnicity;
     @Persistent
@@ -72,6 +75,10 @@ public class Guest {
 
     public void setLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUpperCaseLastName() {
+        return upperCaseLastName;
     }
 
     public String getEthnicity() {
@@ -140,4 +147,12 @@ public class Guest {
         this.lang = lang;
     }
 
+    @Override
+    public void jdoPreStore() {
+        if (lastName != null) {
+            upperCaseLastName = lastName.toUpperCase();
+        } else {
+            upperCaseLastName = null;
+        }
+    }
 }

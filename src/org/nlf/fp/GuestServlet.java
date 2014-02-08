@@ -86,11 +86,11 @@ public class GuestServlet extends HttpServlet {
 
     private void getGuestsFromSearch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
         // TODO Getting an error here, look at later. (Seems to be working now!)
-        final String lastName = req.getParameter("lastName");
+        final String lastName = req.getParameter("lastName").toUpperCase();
         final PersistenceManager pm = PMF.get().getPersistenceManager();
         final Query q = pm.newQuery(Guest.class);
         try {
-            q.setFilter("lastName.startsWith(givenLastName)");
+            q.setFilter("upperCaseLastName.startsWith(givenLastName)");
             // q.setOrdering("lastName asc, firstName asc");
             q.declareParameters("String givenLastName");
 

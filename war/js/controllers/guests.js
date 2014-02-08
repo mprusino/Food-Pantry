@@ -84,8 +84,8 @@ function GuestsCtrl($scope, $rootScope, $http, $cacheFactory, $timeout) {
 	$rootScope.guestSearch = function() {
 		// Determine if we need to search by last name.
 		var url = '/guest';
-		if ($rootScope.query != undefined && $rootScope.query != "") {
-			url += '?lastName=' + $rootScope.query;
+		if ($scope.query != undefined && $scope.query != "") {
+			url += '?lastName=' + $scope.query;
 		}
 		
 		$http.get(url).success(function(guests) {
