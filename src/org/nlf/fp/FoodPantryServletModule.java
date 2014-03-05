@@ -6,9 +6,11 @@ public class FoodPantryServletModule extends ServletModule {
     @Override
     protected void configureServlets() {
         serve("/login*").with(LoginServlet.class);
+        serve("/unauthorized*").with(NotAVolunteerServlet.class);
 
         serve("/food-pantry*").with(IndexServlet.class);
         filter("/food-pantry*").through(AuthenticationFilter.class);
+        filter("/food-pantry*").through(VolunteerFilter.class);
 
         serve("/guest*").with(GuestServlet.class);
         filter("/guest*").through(AuthenticationFilter.class);
