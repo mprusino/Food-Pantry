@@ -15,6 +15,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </filter-mapping>
 
     <listener>
-        <listener-class>org.nlf.fp.FoodPantryGuiceServletContextListener</listener-class>
+        <listener-class>org.nlf.fp.servlets.FoodPantryGuiceServletContextListener</listener-class>
     </listener>
 </web-app>

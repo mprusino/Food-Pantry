@@ -22,7 +22,6 @@ public class DataReader {
             while (line != null) {
                 final Guest guest = new Guest();
                 int i = 0;
-                guest.setLegacyFamilyId(Long.parseLong(line[i++]));
                 guest.setLastName(line[i++]);
                 guest.setFirstName(line[i++]);
                 guest.setAddress(line[i++]);
