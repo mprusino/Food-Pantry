@@ -1,6 +1,8 @@
 var parsed = [];
 var transformed = [];
 
+$("#myCarousel").carousel('pause');
+
 function parse() {
 	var data = $("#data").val();
 	data = CSVToArray(data);
@@ -19,7 +21,7 @@ function parse() {
 		}
 	}
 	
-	$("#parsed, #transformed").show();
+	$("#myCarousel, #data, #parseButton, #postButton, #paragraph, #progress").toggle();
 }
 
 function parseLineToJson(line) {
@@ -111,7 +113,13 @@ function zeroIfEmpty(str) {
 
 
 function post() {
+	var totalNumber = transformed.length;
+	
 	for (var i = 0; i < transformed.length; i++) {
 		$.post("/guest", JSON.stringify(transformed[i]))
+		$("#progress .bar").css("width", (i / totalNumber * 100) + "%");
 	}
+	
+	$("#progress .bar").css("width", "100%");
+	$("#postButton, #done").toggle();
 }
