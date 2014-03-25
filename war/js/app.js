@@ -15,12 +15,6 @@ var app = angular.module('food-pantry', ['ui.bootstrap']).config(
 				title : "Reporting",
 				linkUrl : "/reporting"
 			})
-			/*.when('/admin', {
-				templateUrl : 'templates/admin.jsp',
-				controller : AdminCtrl,
-				title : "Admin",
-				linkUrl : "/admin"
-			})*/
 			.when('/landing', {
 				templateUrl : 'templates/landing.jsp',
 				controller : LandingCtrl

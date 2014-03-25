@@ -20,14 +20,8 @@
 <script src="js/app.js"></script>
 <script src="js/controllers/navbar.js"></script>
 <script src="js/controllers/guests.js"></script>
-
-<script src="js/controllers/admin.js"></script>
-<script src="js/controllers/documents.js"></script>
 <script src="js/controllers/landing.js"></script>
-
 <script src="js/controllers/reporting.js"></script>
-<script src="js/controllers/schedule.js"></script>
-<script src="js/controllers/volunteer.js"></script>
 <title>Food and Clothing Pantry | New Life Community Development Center</title>
 </head>
 <%--Look at app.js --%>
