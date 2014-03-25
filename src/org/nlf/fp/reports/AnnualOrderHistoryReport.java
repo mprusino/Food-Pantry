@@ -49,7 +49,7 @@ public class AnnualOrderHistoryReport {
         }
     }
 
-    private class Row {
+    public class Row {
         private final int month;
         private int totalOrder = 0;
         private int totalFed = 0;
